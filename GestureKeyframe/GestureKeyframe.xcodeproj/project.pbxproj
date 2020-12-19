@@ -11,6 +11,14 @@
 		09BC46EE258DECD900A040F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46ED258DECD900A040F1 /* ContentView.swift */; };
 		09BC46F0258DECDD00A040F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BC46EF258DECDD00A040F1 /* Assets.xcassets */; };
 		09BC46F3258DECDD00A040F1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BC46F2258DECDD00A040F1 /* Preview Assets.xcassets */; };
+		09BC46FD258DF9C200A040F1 /* Keyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46FC258DF9C100A040F1 /* Keyframe.swift */; };
+		09BC4700258DFB2200A040F1 /* CurvePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46FF258DFB2200A040F1 /* CurvePath.swift */; };
+		09BC4711258DFE2D00A040F1 /* BigBgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC470C258DFE2D00A040F1 /* BigBgView.swift */; };
+		09BC4712258DFE2D00A040F1 /* StonePitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC470D258DFE2D00A040F1 /* StonePitView.swift */; };
+		09BC4713258DFE2D00A040F1 /* StonePitParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC470E258DFE2D00A040F1 /* StonePitParameters.swift */; };
+		09BC4714258DFE2D00A040F1 /* BigFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC470F258DFE2D00A040F1 /* BigFaceView.swift */; };
+		09BC4715258DFE2D00A040F1 /* BigBgImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC4710258DFE2D00A040F1 /* BigBgImage.swift */; };
+		09BC4719258DFE6C00A040F1 /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC4718258DFE6C00A040F1 /* UIColorHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +28,14 @@
 		09BC46EF258DECDD00A040F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09BC46F2258DECDD00A040F1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		09BC46F4258DECDD00A040F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09BC46FC258DF9C100A040F1 /* Keyframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyframe.swift; sourceTree = "<group>"; };
+		09BC46FF258DFB2200A040F1 /* CurvePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvePath.swift; sourceTree = "<group>"; };
+		09BC470C258DFE2D00A040F1 /* BigBgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigBgView.swift; sourceTree = "<group>"; };
+		09BC470D258DFE2D00A040F1 /* StonePitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StonePitView.swift; sourceTree = "<group>"; };
+		09BC470E258DFE2D00A040F1 /* StonePitParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StonePitParameters.swift; sourceTree = "<group>"; };
+		09BC470F258DFE2D00A040F1 /* BigFaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigFaceView.swift; sourceTree = "<group>"; };
+		09BC4710258DFE2D00A040F1 /* BigBgImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigBgImage.swift; sourceTree = "<group>"; };
+		09BC4718258DFE6C00A040F1 /* UIColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +68,9 @@
 		09BC46EA258DECD900A040F1 /* GestureKeyframe */ = {
 			isa = PBXGroup;
 			children = (
+				09BC4705258DFD7700A040F1 /* Example */,
+				09BC46FC258DF9C100A040F1 /* Keyframe.swift */,
+				09BC46FF258DFB2200A040F1 /* CurvePath.swift */,
 				09BC46EB258DECD900A040F1 /* GestureKeyframeApp.swift */,
 				09BC46ED258DECD900A040F1 /* ContentView.swift */,
 				09BC46EF258DECDD00A040F1 /* Assets.xcassets */,
@@ -67,6 +86,51 @@
 				09BC46F2258DECDD00A040F1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		09BC4705258DFD7700A040F1 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				09BC4717258DFE5000A040F1 /* Helper */,
+				09BC4709258DFDB900A040F1 /* MoonAnimation */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		09BC4709258DFDB900A040F1 /* MoonAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				09BC470A258DFE2D00A040F1 /* bigMoon */,
+			);
+			path = MoonAnimation;
+			sourceTree = "<group>";
+		};
+		09BC470A258DFE2D00A040F1 /* bigMoon */ = {
+			isa = PBXGroup;
+			children = (
+				09BC470B258DFE2D00A040F1 /* bgView */,
+			);
+			path = bigMoon;
+			sourceTree = "<group>";
+		};
+		09BC470B258DFE2D00A040F1 /* bgView */ = {
+			isa = PBXGroup;
+			children = (
+				09BC470C258DFE2D00A040F1 /* BigBgView.swift */,
+				09BC470D258DFE2D00A040F1 /* StonePitView.swift */,
+				09BC470E258DFE2D00A040F1 /* StonePitParameters.swift */,
+				09BC470F258DFE2D00A040F1 /* BigFaceView.swift */,
+				09BC4710258DFE2D00A040F1 /* BigBgImage.swift */,
+			);
+			path = bgView;
+			sourceTree = "<group>";
+		};
+		09BC4717258DFE5000A040F1 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				09BC4718258DFE6C00A040F1 /* UIColorHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +202,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09BC4714258DFE2D00A040F1 /* BigFaceView.swift in Sources */,
+				09BC4712258DFE2D00A040F1 /* StonePitView.swift in Sources */,
+				09BC46FD258DF9C200A040F1 /* Keyframe.swift in Sources */,
+				09BC4700258DFB2200A040F1 /* CurvePath.swift in Sources */,
 				09BC46EE258DECD900A040F1 /* ContentView.swift in Sources */,
+				09BC4711258DFE2D00A040F1 /* BigBgView.swift in Sources */,
 				09BC46EC258DECD900A040F1 /* GestureKeyframeApp.swift in Sources */,
+				09BC4719258DFE6C00A040F1 /* UIColorHelper.swift in Sources */,
+				09BC4713258DFE2D00A040F1 /* StonePitParameters.swift in Sources */,
+				09BC4715258DFE2D00A040F1 /* BigBgImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +275,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -245,7 +318,9 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
