@@ -19,6 +19,7 @@
 		09BC4714258DFE2D00A040F1 /* BigFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC470F258DFE2D00A040F1 /* BigFaceView.swift */; };
 		09BC4715258DFE2D00A040F1 /* BigBgImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC4710258DFE2D00A040F1 /* BigBgImage.swift */; };
 		09BC4719258DFE6C00A040F1 /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC4718258DFE6C00A040F1 /* UIColorHelper.swift */; };
+		09BC472A258E02C100A040F1 /* BigMoonKeyframeParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC4729258E02C100A040F1 /* BigMoonKeyframeParameters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		09BC470F258DFE2D00A040F1 /* BigFaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigFaceView.swift; sourceTree = "<group>"; };
 		09BC4710258DFE2D00A040F1 /* BigBgImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigBgImage.swift; sourceTree = "<group>"; };
 		09BC4718258DFE6C00A040F1 /* UIColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHelper.swift; sourceTree = "<group>"; };
+		09BC4729258E02C100A040F1 /* BigMoonKeyframeParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigMoonKeyframeParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +70,8 @@
 		09BC46EA258DECD900A040F1 /* GestureKeyframe */ = {
 			isa = PBXGroup;
 			children = (
+				09BC4727258E026700A040F1 /* source */,
 				09BC4705258DFD7700A040F1 /* Example */,
-				09BC46FC258DF9C100A040F1 /* Keyframe.swift */,
-				09BC46FF258DFB2200A040F1 /* CurvePath.swift */,
 				09BC46EB258DECD900A040F1 /* GestureKeyframeApp.swift */,
 				09BC46ED258DECD900A040F1 /* ContentView.swift */,
 				09BC46EF258DECDD00A040F1 /* Assets.xcassets */,
@@ -121,6 +122,7 @@
 				09BC470E258DFE2D00A040F1 /* StonePitParameters.swift */,
 				09BC470F258DFE2D00A040F1 /* BigFaceView.swift */,
 				09BC4710258DFE2D00A040F1 /* BigBgImage.swift */,
+				09BC4729258E02C100A040F1 /* BigMoonKeyframeParameters.swift */,
 			);
 			path = bgView;
 			sourceTree = "<group>";
@@ -131,6 +133,15 @@
 				09BC4718258DFE6C00A040F1 /* UIColorHelper.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		09BC4727258E026700A040F1 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				09BC46FC258DF9C100A040F1 /* Keyframe.swift */,
+				09BC46FF258DFB2200A040F1 /* CurvePath.swift */,
+			);
+			path = source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09BC472A258E02C100A040F1 /* BigMoonKeyframeParameters.swift in Sources */,
 				09BC4714258DFE2D00A040F1 /* BigFaceView.swift in Sources */,
 				09BC4712258DFE2D00A040F1 /* StonePitView.swift in Sources */,
 				09BC46FD258DF9C200A040F1 /* Keyframe.swift in Sources */,
