@@ -21,14 +21,14 @@ public enum CurveType {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-public struct AutoGesture<Content> : View where Content : View {
+public struct Keyframe<Content> : View where Content : View {
     
     public var body: Content
     
     public init (_ bindIntercept: CGFloat, timeLine: [CGFloat], curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
         
         func gen(_ keyFrames: [CGFloat]) -> CGFloat {
-            return AutoGesture.oneDimensionalHandler(keyFrames, bindIntercept, timeLine: timeLine, curveType: curveType, precision: precision)
+            return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept, timeLine: timeLine, curveType: curveType, precision: precision)
         }
 
         self.body = content(gen)
@@ -46,10 +46,10 @@ public struct AutoGesture<Content> : View where Content : View {
         func gen(_ keyFrames: [CGFloat], _ use: UseCoordinate) -> CGFloat {
             if use == .x {
                 let tl: [CGFloat] = timeLine.map { $0.x }
-                return AutoGesture.oneDimensionalHandler(keyFrames, bindIntercept.x, timeLine: tl, curveType: curveType, precision: precision)
+                return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept.x, timeLine: tl, curveType: curveType, precision: precision)
             } else  {
                 let tl: [CGFloat] = timeLine.map { $0.y }
-                return AutoGesture.oneDimensionalHandler(keyFrames, bindIntercept.y, timeLine: tl, curveType: curveType, precision: precision)
+                return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept.y, timeLine: tl, curveType: curveType, precision: precision)
             }
         }
         

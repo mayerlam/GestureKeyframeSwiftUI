@@ -32,7 +32,7 @@ extension CurvePath {
         let length = endX - beginX
         let delta = curX - beginX
         
-        return delta < 0 ? 0 : ( delta > endX ? 1 : delta / length)
+        return delta < 0 ? 0 : ( delta > (endX - beginX) ? 1 : delta / length)
     }
     
     /// According to the given X coordinate,
