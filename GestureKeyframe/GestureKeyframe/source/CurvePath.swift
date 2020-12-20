@@ -14,7 +14,10 @@ protocol CurvePathDelegate {
 class BasePath {
     var nodes: [CGPoint]
     public var path: Path? {
-        self._path == nil ? self.delegate?.buildPath(nodes) : self._path
+        if self._path == nil {
+            self._path = self.delegate?.buildPath(nodes)
+        }
+        return self._path
     }
     
     /// Every `subClass` should setting this member,
