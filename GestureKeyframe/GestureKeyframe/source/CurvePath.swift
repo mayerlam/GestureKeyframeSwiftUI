@@ -35,7 +35,7 @@ class BasePath {
     ///
     /// - Parameter curX: The given X coordinate
     /// - Returns: Calculated percentage value
-    func getPect(_ curX: CGFloat) -> CGFloat {
+    func x2Percent(_ curX: CGFloat) -> CGFloat {
         guard let beginNode = self.nodes.first else {
             return 0
         }
@@ -55,7 +55,7 @@ class BasePath {
     ///   - curX: The given X coordinate
     ///   - precision: Differential quantities
     /// - Returns: Y coordinate
-    func getValue(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
+    func curValue(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
         
         guard let pt = self.path else {
             return nil
@@ -68,11 +68,35 @@ class BasePath {
             return 0
         }
         
-        let pect = getPect(curX)
+        let pect = x2Percent(curX)
         let from: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1 - precision) : pect
         let to: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1) : pect + precision
         let tinySegment = pt.trimmedPath(from: from, to: to)
         return tinySegment.boundingRect.midY
+    }
+    
+    func curAngle(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
+
+        var weight: CGFloat = 1.00
+
+        guard let pt1 = curValue(x: curX, precision: precision),
+              var pt2 = curValue(x: curX + weight * precision * 10, precision: precision)
+        else {
+            return nil
+        }
+        
+        if pt1 == pt2 {
+            weight = -1
+            pt2 = curValue(x: curX + weight * precision * 10, precision: precision)!
+            
+        }
+        
+        if pt1 == pt2 {
+            return nil
+        }
+        
+        let k = (pt2 - pt1) / (weight * precision * 10)
+        return CGFloat(atan(k))
     }
 }
 
