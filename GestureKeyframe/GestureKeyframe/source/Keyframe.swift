@@ -117,7 +117,7 @@ public struct Keyframe<Content> : View where Content : View {
         switch curveType {
             case .line:
                 let timeLineCurv = PolylineCurve(nodes)
-                return timeLineCurv.getValue(x: bindIntercept, precision: precision)!
+                return timeLineCurv.curValue(x: bindIntercept, precision: precision)!
             default:
                 return .zero
         }
