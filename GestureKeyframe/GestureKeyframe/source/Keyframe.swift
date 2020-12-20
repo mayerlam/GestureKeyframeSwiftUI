@@ -56,6 +56,11 @@ public struct Keyframe<Content> : View where Content : View {
         self.body = content(gen)
     }
     
+    public init (_ bindIntercept: CGSize, timeLine: [CGPoint], curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
+        let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
+        self.init(point, timeLine: timeLine, content: content)
+    }
+    
     /// `oneDimensionalHandler`生成函数
     /// 是一个通过变化曲线`path`，以及给定指针x坐标而映射得到对应的值
     /// 可以应用在只提供若干关键帧，而推算出所有的变化
@@ -112,7 +117,7 @@ public struct Keyframe<Content> : View where Content : View {
         switch curveType {
             case .line:
                 let timeLineCurv = PolylineCurve(nodes)
-                return timeLineCurv.getValue(x: bindIntercept, precision: precision)
+                return timeLineCurv.getValue(x: bindIntercept, precision: precision)!
             default:
                 return .zero
         }

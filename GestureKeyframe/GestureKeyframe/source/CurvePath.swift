@@ -7,15 +7,26 @@
 
 import SwiftUI
 
-/// According to the given nodes, make a path
-protocol CurvePath {
-    var nodes: [CGPoint] {set get}
-    var path: Path { set get}
-    static func buildPath(_ nodes: [CGPoint]) -> Path
+protocol CurvePathDelegate {
+    func buildPath(_ nodes: [CGPoint]) -> Path
 }
 
-
-extension CurvePath {
+class BasePath {
+    var nodes: [CGPoint]
+    public var path: Path? {
+        self._path
+    }
+    
+    /// Every `subClass` should setting this member,
+    /// if you want get the `Path` by the given nodes.
+    var delegate: CurvePathDelegate?
+    
+    private var _path: Path?
+    
+    init(_ nodes: [CGPoint]) {
+        self.nodes = nodes
+        self._path = delegate?.buildPath(nodes)
+    }
     
     /// According to the given X coordinate,
     /// calculate the percentage from the start point of path
@@ -42,8 +53,15 @@ extension CurvePath {
     ///   - curX: The given X coordinate
     ///   - precision: Differential quantities
     /// - Returns: Y coordinate
-    func getValue(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat {
-        // As the precision, it should be a very small number.
+    func getValue(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
+        
+        guard let pt = self.path else {
+            return nil
+        }
+        
+        /// As the precision, it should be a very small number.
+        /// Even you give a bigger number, the program still run ok
+        /// But it always return `0`
         guard precision < 1 else {
             return 0
         }
@@ -51,27 +69,22 @@ extension CurvePath {
         let pect = getPect(curX)
         let from: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1 - precision) : pect
         let to: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1) : pect + precision
-        let tinySegment = path.trimmedPath(from: from, to: to)
+        let tinySegment = pt.trimmedPath(from: from, to: to)
         return tinySegment.boundingRect.midY
     }
 }
 
-
 /// The poly-line time curve that conforms TimeLineCurve
 /// In fact, it's a piecewise function
 /// and each sub-functions are linear function
-struct PolylineCurve: CurvePath {
-    
-    var path: Path
-    
-    var nodes: [CGPoint]
-    
-    init(_ nodes: [CGPoint]) {
-        self.nodes = nodes
-        self.path = PolylineCurve.buildPath(nodes)
+class PolylineCurve: BasePath, CurvePathDelegate {
+
+    override init(_ nodes: [CGPoint]) {
+        super.init(nodes)
+        self.delegate = self
     }
     
-    static func buildPath(_ nodes: [CGPoint]) -> Path {
+    func buildPath(_ nodes: [CGPoint]) -> Path {
         var path = Path()
         
         for i in 0..<nodes.count {
