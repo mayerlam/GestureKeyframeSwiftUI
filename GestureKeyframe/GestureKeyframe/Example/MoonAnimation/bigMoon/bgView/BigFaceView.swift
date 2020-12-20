@@ -24,10 +24,7 @@ struct BigFaceView: View {
     var body: some View {
         GeometryReader { geo in
             let scale = min(geo.size.width, geo.size.height) / 270
-            Keyframe(
-                CGPoint(x: gesture.width, y: gesture.height),
-                timeLine: keyPoint,
-                curveType: .line) { out in
+            Keyframe(gesture, timeLine: keyPoint, curveType: .line) { out in
 
                 let leftEye = BFKFParameters.leftEye
                 let rightEye = BFKFParameters.rightEye
