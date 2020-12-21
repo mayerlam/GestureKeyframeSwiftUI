@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct Example1: View {
-    let capsuleRate: CGFloat = 1.78
-    let containerRate: CGFloat = 1.7
     
-    let width: CGFloat = 50.0
+    @State var gesture: CGSize = .zero
+    @State var position: CGSize = .zero
+    @State var flag: Int = 0
+    
+    let containerRate: CGFloat = 1.7
     var body: some View {
+
         GeometryReader { geo in
             let size = min(geo.size.width, geo.size.height)
             let width: CGFloat = (size / 4.0) * containerRate
@@ -23,41 +26,65 @@ struct Example1: View {
                 HStack {
                     Spacer()
                     ZStack(alignment: .center) {
+                        Circle()
+                            .foregroundColor(Color(hex: 0xD45E07))
+                            .scaleEffect(position.width < 0 ? 0 : position.width * 2 / width)
                         HStack(alignment: .center, spacing: 0) {
-                            CapsuleTemplate_ex1(strokeColor: Color(hex: 0xEFD319).opacity(0.12), strokerWidth: 2, color: Color.clear)
-                                .frame(width: width, height: height, alignment: .center)
-//                            HStack {
-//                                Capsule()
-//                                    .overlay(Capsule().stroke(Color(hex: 0xEFD319).opacity(0.12), lineWidth: 2))
-//                                    .frame(width: height / capsuleRate, height: height)
-//                                    .foregroundColor(Color.clear)
-//                            }
-//                            .frame(width: width, height: height, alignment: .center)
-                            HStack {
-                                Capsule()
-                                    .overlay(Capsule().stroke(Color.white.opacity(0.06), lineWidth: 2))
-                                    .frame(width: height / capsuleRate, height: height)
-                                    .foregroundColor(Color.white.opacity(0.06))
-                            }
+                            // 左侧静态图形
+                            CapsuleTemplate_ex1(
+                                strokeColor : Color(hex: 0xEFD319).opacity(0.12),
+                                strokerWidth: 2,
+                                color       : Color.clear
+                            )
+                            .frame(width: width, height: height, alignment: .center)
+                            // 右侧静态图形
+                            CapsuleTemplate_ex1(
+                                strokeColor : Color.white.opacity(0.06),
+                                strokerWidth: 2,
+                                color       : Color.white.opacity(0.06)
+                            )
                             .frame(width: width, height: height, alignment: .center)
                         }
                         .frame(width: width * 2, height: height, alignment: .center)
-                        
-                        HStack {
-                            Capsule()
-                                .overlay(Capsule().stroke(Color(hex: 0xEFD319).opacity(0.12), lineWidth: 2))
-                                .frame(width: height / capsuleRate, height: height)
-                                .foregroundColor(Color.white)
-                        }
-                        .frame(width: width, height: height, alignment: .center)
+                        // 顶层动态图形
+                        CapsuleTemplate_ex1(
+                            strokeColor : Color(hex: 0xEFD319).opacity(0.12),
+                            strokerWidth: 2,
+                            color       : Color.white
+                        )
+//                        .rotationEffect(Angle(radians: Double(position.width / width * 3)))
+                        .frame(width: width, height: height, alignment: .topLeading).offset(x: -width / 2)
+                        .offset(x: position.width)
+//                        .animation(.spring(dampingFraction: 1, blendDuration: 1) )
                     }
                     Spacer()
                 }
-
                 Spacer()
             }
+            .gesture(
+                DragGesture()
+                    .onChanged({
+                        if $0.translation.width + self.gesture.width <= 0 {
+                            self.position.width = -width - (1 / (($0.translation.width + self.gesture.width) - 1 / width))
+                        } else {
+                            self.position.width = $0.translation.width + self.gesture.width
+                            self.position.height = $0.translation.height + self.gesture.height
+                        }
+//                        if $0.translation.width + self.gesture.width < 0 ||
+//                            $0.translation.width + self.gesture.width > width {
+//                            self.position.width = (width - 1 / $0.translation.width) + self.gesture.width
+//                            self.position.height = 1 / $0.translation.height + self.gesture.height
+//                        } else {
+//                            self.position.width = $0.translation.width + self.gesture.width
+//                            self.position.height = $0.translation.height + self.gesture.height
+//                        }
+                    })
+                    .onEnded({ _ in
+                        self.gesture = self.position
+                    })
+            )
         }
-        .background(Color(hex: 0xD45E07))
+        .background(Color(hex: 0x3B3B3B))
         .edgesIgnoringSafeArea(.all)
     }
 }
@@ -71,7 +98,7 @@ struct CapsuleTemplate_ex1: View {
     var body: some View {
         GeometryReader { geometry in
             let width = min(geometry.size.width, geometry.size.height * 0.85)
-            let height = width / 1.7
+            let height = width / 0.85
             HStack(alignment: .center, spacing: 0) {
                 VStack(alignment: .center, spacing: 0) {
                     HStack {
@@ -81,8 +108,7 @@ struct CapsuleTemplate_ex1: View {
                             .frame(width: height / 1.78, height: height, alignment: .center)
                             .foregroundColor(color)
                         Spacer()
-                    }
-                    .frame(width: width, height: height)
+                    }.frame(width: width, height: height)
                 }.frame(width: geometry.size.width, height: geometry.size.height)
             }.frame(width: geometry.size.width, height: geometry.size.height)
         }

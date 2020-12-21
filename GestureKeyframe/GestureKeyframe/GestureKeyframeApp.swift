@@ -11,7 +11,7 @@ import SwiftUI
 struct GestureKeyframeApp: App {
     var body: some Scene {
         WindowGroup {
-            Example3()
+            Navigator()
         }
     }
 }
