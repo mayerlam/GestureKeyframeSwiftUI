@@ -10,8 +10,10 @@
 		093C2C65258F753700202AE9 /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C64258F753700202AE9 /* Example2.swift */; };
 		093C2C6A258F773200202AE9 /* Example1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C69258F773200202AE9 /* Example1.swift */; };
 		093C2C6E258F777400202AE9 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C6D258F777400202AE9 /* Navigator.swift */; };
+		0993945F2592369100BE2E5C /* Example1CapsuleBg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */; };
+		0993946425923B1500BE2E5C /* Example1ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993946325923B1500BE2E5C /* Example1ScrollView.swift */; };
 		09A7F77D259205AB00D76CF9 /* ScrollViewOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7F77C259205AB00D76CF9 /* ScrollViewOffset.swift */; };
-		09A7F780259208C800D76CF9 /* Example2Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7F77F259208C800D76CF9 /* Example2Parameters.swift */; };
+		09A7F780259208C800D76CF9 /* Example1Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7F77F259208C800D76CF9 /* Example1Parameters.swift */; };
 		09BC46EC258DECD900A040F1 /* GestureKeyframeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46EB258DECD900A040F1 /* GestureKeyframeApp.swift */; };
 		09BC46EE258DECD900A040F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46ED258DECD900A040F1 /* ContentView.swift */; };
 		09BC46F0258DECDD00A040F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BC46EF258DECDD00A040F1 /* Assets.xcassets */; };
@@ -31,8 +33,10 @@
 		093C2C64258F753700202AE9 /* Example2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2.swift; sourceTree = "<group>"; };
 		093C2C69258F773200202AE9 /* Example1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1.swift; sourceTree = "<group>"; };
 		093C2C6D258F777400202AE9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1CapsuleBg.swift; sourceTree = "<group>"; };
+		0993946325923B1500BE2E5C /* Example1ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1ScrollView.swift; sourceTree = "<group>"; };
 		09A7F77C259205AB00D76CF9 /* ScrollViewOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffset.swift; sourceTree = "<group>"; };
-		09A7F77F259208C800D76CF9 /* Example2Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2Parameters.swift; sourceTree = "<group>"; };
+		09A7F77F259208C800D76CF9 /* Example1Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1Parameters.swift; sourceTree = "<group>"; };
 		09BC46E8258DECD900A040F1 /* GestureKeyframe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestureKeyframe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BC46EB258DECD900A040F1 /* GestureKeyframeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureKeyframeApp.swift; sourceTree = "<group>"; };
 		09BC46ED258DECD900A040F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -73,7 +77,9 @@
 			isa = PBXGroup;
 			children = (
 				093C2C69258F773200202AE9 /* Example1.swift */,
-				09A7F77F259208C800D76CF9 /* Example2Parameters.swift */,
+				09A7F77F259208C800D76CF9 /* Example1Parameters.swift */,
+				0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */,
+				0993946325923B1500BE2E5C /* Example1ScrollView.swift */,
 			);
 			path = Example1;
 			sourceTree = "<group>";
@@ -245,11 +251,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				09BC472A258E02C100A040F1 /* BigMoonKeyframeParameters.swift in Sources */,
+				0993945F2592369100BE2E5C /* Example1CapsuleBg.swift in Sources */,
 				09BC4714258DFE2D00A040F1 /* BigFaceView.swift in Sources */,
 				09BC4712258DFE2D00A040F1 /* StonePitView.swift in Sources */,
+				0993946425923B1500BE2E5C /* Example1ScrollView.swift in Sources */,
 				09BC46FD258DF9C200A040F1 /* Keyframe.swift in Sources */,
 				09BC4700258DFB2200A040F1 /* CurvePath.swift in Sources */,
-				09A7F780259208C800D76CF9 /* Example2Parameters.swift in Sources */,
+				09A7F780259208C800D76CF9 /* Example1Parameters.swift in Sources */,
 				09BC46EE258DECD900A040F1 /* ContentView.swift in Sources */,
 				09BC4711258DFE2D00A040F1 /* Example3.swift in Sources */,
 				093C2C6E258F777400202AE9 /* Navigator.swift in Sources */,
