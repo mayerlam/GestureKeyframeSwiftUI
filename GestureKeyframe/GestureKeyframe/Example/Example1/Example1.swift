@@ -7,10 +7,11 @@
 
 import SwiftUI
 
+let timeLine: [CGFloat] = []
+let keys: [CGFloat] = []
+
 struct Example1: View {
     
-    @State var gesture: CGSize = .zero
-    @State var position: CGSize = .zero
     @State var scrollOffset: CGFloat = .zero
     @State var flag: Int = 0
     
@@ -23,18 +24,20 @@ struct Example1: View {
             let height = size / 2
             let padding = geo.size.width / 2.0 - width
             
-            Keyframe(scrollOffset, timeLine: []) { f in
+            Keyframe(scrollOffset, timeLine: timeLine) { f in
                 VStack(spacing: 0) {
                     Spacer()
                     HStack(spacing: 0) {
                         ZStack(alignment: .center) {
                             Circle()
                                 .foregroundColor(Color(hex: 0xD45E07).opacity(
-                                    scrollOffset >= 0 ? 0.0 : abs(Double(scrollOffset)) / Double(width)
+//                                    scrollOffset >= 0 ? 0.0 : abs(Double(scrollOffset)) / Double(width)
+                                    Double(f(keys))
                                 ))
                                 .scaleEffect(
-                                    scrollOffset >= 0 ? 0 :
-                                        (scrollOffset) * 4 / (width)
+//                                    scrollOffset >= 0 ? 0 :
+//                                        (scrollOffset) * 4 / (width)
+                                    f(keys)
                                 )
                             HStack(alignment: .center, spacing: 0) {
                                 // 左侧静态图形
@@ -72,7 +75,7 @@ struct Example1: View {
                                         )
                                         .frame(width: width)
                                         .id(1)
-                                        .rotationEffect(Angle(degrees: Double((scrollOffset)) ))
+                                        .rotationEffect(Angle(degrees: Double(f(keys)) ))
                                         
                                         Rectangle()
                                             .frame(width: width)
@@ -95,12 +98,6 @@ struct Example1: View {
         }
         .background(Color(hex: 0x3B3B3B))
         .edgesIgnoringSafeArea(.all)
-    }
-    
-    func offset(_ proxy:GeometryProxy) -> some View {
-        let minY = proxy.frame(in: .named("frameLayer")).minX
-        self.scrollOffset = minY
-        return Color.clear
     }
 }
 
