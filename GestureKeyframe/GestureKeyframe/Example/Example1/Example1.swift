@@ -11,6 +11,7 @@ struct Example1: View {
     
     @State var gesture: CGSize = .zero
     @State var position: CGSize = .zero
+    @State var scrollOffset: CGFloat = .zero
     @State var flag: Int = 0
     
     let containerRate: CGFloat = 1.7
@@ -20,74 +21,89 @@ struct Example1: View {
             let size = min(geo.size.width, geo.size.height)
             let width: CGFloat = (size / 4.0) * containerRate
             let height = size / 2
-    
-            VStack {
-                Spacer()
-                HStack {
+            let padding = geo.size.width / 2.0 - width
+            
+            Keyframe(scrollOffset, timeLine: []) { f in
+                VStack(spacing: 0) {
                     Spacer()
-                    ZStack(alignment: .center) {
-                        Circle()
-                            .foregroundColor(Color(hex: 0xD45E07))
-                            .scaleEffect(position.width < 0 ? 0 : position.width * 2 / width)
-                        HStack(alignment: .center, spacing: 0) {
-                            // 左侧静态图形
-                            CapsuleTemplate_ex1(
-                                strokeColor : Color(hex: 0xEFD319).opacity(0.12),
-                                strokerWidth: 2,
-                                color       : Color.clear
-                            )
-                            .frame(width: width, height: height, alignment: .center)
-                            // 右侧静态图形
-                            CapsuleTemplate_ex1(
-                                strokeColor : Color.white.opacity(0.06),
-                                strokerWidth: 2,
-                                color       : Color.white.opacity(0.06)
-                            )
-                            .frame(width: width, height: height, alignment: .center)
+                    HStack(spacing: 0) {
+                        ZStack(alignment: .center) {
+                            Circle()
+                                .foregroundColor(Color(hex: 0xD45E07).opacity(
+                                    scrollOffset >= 0 ? 0.0 : abs(Double(scrollOffset)) / Double(width)
+                                ))
+                                .scaleEffect(
+                                    scrollOffset >= 0 ? 0 :
+                                        (scrollOffset) * 4 / (width)
+                                )
+                            HStack(alignment: .center, spacing: 0) {
+                                // 左侧静态图形
+                                CapsuleTemplate_ex1(
+                                    strokeColor : Color(hex: 0xEFD319).opacity(0.12),
+                                    strokerWidth: 2,
+                                    color       : Color.clear
+                                )
+                                .frame(width: width, alignment: .center)
+                                // 右侧静态图形
+                                CapsuleTemplate_ex1(
+                                    strokeColor : Color.white.opacity(0.06),
+                                    strokerWidth: 2,
+                                    color       : Color.white.opacity(0.06)
+                                )
+                                .frame(width: width, alignment: .center)
+                            }
+                            .frame(width: width * 2, height: height, alignment: .center)
+                            
+                            ScrollViewReader { sv in
+                                ScrollViewOffset(.horizontal, showsIndicators: false) {
+                                    scrollOffset = $0
+                                } content: {
+                                    HStack(spacing: 0) {
+                                        Rectangle()
+                                            .frame(width: width)
+                                            .foregroundColor(Color.clear)
+                                            .id(0)
+                                        
+                                        // 顶层动态图形
+                                        CapsuleTemplate_ex1(
+                                            strokeColor : Color(hex: 0xEFD319).opacity(0.12),
+                                            strokerWidth: 2,
+                                            color       : Color.white
+                                        )
+                                        .frame(width: width)
+                                        .id(1)
+                                        .rotationEffect(Angle(degrees: Double((scrollOffset)) ))
+                                        
+                                        Rectangle()
+                                            .frame(width: width)
+                                            .foregroundColor(Color.clear)
+                                            .id(2)
+                                    }
+                                    .onAppear {
+                                        sv.scrollTo(1)
+                                    }
+                                    .padding(padding)
+                                }
+                            }
                         }
-                        .frame(width: width * 2, height: height, alignment: .center)
-                        // 顶层动态图形
-                        CapsuleTemplate_ex1(
-                            strokeColor : Color(hex: 0xEFD319).opacity(0.12),
-                            strokerWidth: 2,
-                            color       : Color.white
-                        )
-//                        .rotationEffect(Angle(radians: Double(position.width / width * 3)))
-                        .frame(width: width, height: height, alignment: .topLeading).offset(x: -width / 2)
-                        .offset(x: position.width)
-//                        .animation(.spring(dampingFraction: 1, blendDuration: 1) )
                     }
                     Spacer()
                 }
-                Spacer()
+                
             }
-            .gesture(
-                DragGesture()
-                    .onChanged({
-                        if $0.translation.width + self.gesture.width <= 0 {
-                            self.position.width = -width - (1 / (($0.translation.width + self.gesture.width) - 1 / width))
-                        } else {
-                            self.position.width = $0.translation.width + self.gesture.width
-                            self.position.height = $0.translation.height + self.gesture.height
-                        }
-//                        if $0.translation.width + self.gesture.width < 0 ||
-//                            $0.translation.width + self.gesture.width > width {
-//                            self.position.width = (width - 1 / $0.translation.width) + self.gesture.width
-//                            self.position.height = 1 / $0.translation.height + self.gesture.height
-//                        } else {
-//                            self.position.width = $0.translation.width + self.gesture.width
-//                            self.position.height = $0.translation.height + self.gesture.height
-//                        }
-                    })
-                    .onEnded({ _ in
-                        self.gesture = self.position
-                    })
-            )
+            
         }
         .background(Color(hex: 0x3B3B3B))
         .edgesIgnoringSafeArea(.all)
     }
+    
+    func offset(_ proxy:GeometryProxy) -> some View {
+        let minY = proxy.frame(in: .named("frameLayer")).minX
+        self.scrollOffset = minY
+        return Color.clear
+    }
 }
+
 
 struct CapsuleTemplate_ex1: View {
     
