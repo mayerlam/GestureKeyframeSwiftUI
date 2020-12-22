@@ -11,7 +11,7 @@ struct Example1: View {
     
     @State var gesture: CGSize = .zero
     @State var position: CGSize = .zero
-    @State var flag: Int = 0
+    @State var flag = false
     
     let containerRate: CGFloat = 1.7
     var body: some View {
@@ -28,7 +28,7 @@ struct Example1: View {
                     ZStack(alignment: .center) {
                         Circle()
                             .foregroundColor(Color(hex: 0xD45E07))
-                            .scaleEffect(position.width < 0 ? 0 : position.width * 2 / width)
+                            .scaleEffect(position.width < 0 ? 0 : position.width * 3 / width)
                         HStack(alignment: .center, spacing: 0) {
                             // 左侧静态图形
                             CapsuleTemplate_ex1(
@@ -55,7 +55,7 @@ struct Example1: View {
 //                        .rotationEffect(Angle(radians: Double(position.width / width * 3)))
                         .frame(width: width, height: height, alignment: .topLeading).offset(x: -width / 2)
                         .offset(x: position.width)
-//                        .animation(.spring(dampingFraction: 1, blendDuration: 1) )
+                        .animation(flag ? nil :.easeIn)
                     }
                     Spacer()
                 }
@@ -64,28 +64,36 @@ struct Example1: View {
             .gesture(
                 DragGesture()
                     .onChanged({
-                        if $0.translation.width + self.gesture.width <= 0 {
-                            self.position.width = -width - (1 / (($0.translation.width + self.gesture.width) - 1 / width))
-                        } else {
-                            self.position.width = $0.translation.width + self.gesture.width
-                            self.position.height = $0.translation.height + self.gesture.height
+                        flag = true
+                        let x = $0.translation.width + self.gesture.width
+                        switch x {
+                        case ..<0:
+                            self.position.width = changeCurve(x: x)
+                        case 0...width:
+                            self.position.width = x
+                        default:
+                            self.position.width = 2 * (x - width) / log(exp(1.0) + x - width) + width
                         }
-//                        if $0.translation.width + self.gesture.width < 0 ||
-//                            $0.translation.width + self.gesture.width > width {
-//                            self.position.width = (width - 1 / $0.translation.width) + self.gesture.width
-//                            self.position.height = 1 / $0.translation.height + self.gesture.height
-//                        } else {
-//                            self.position.width = $0.translation.width + self.gesture.width
-//                            self.position.height = $0.translation.height + self.gesture.height
-//                        }
                     })
                     .onEnded({ _ in
+                        self.flag = false
+                        
+                        if self.position.width < width / 2.0 {
+                            self.position.width = 0
+                        } else {
+                            self.position.width = width
+                        }
+                        
                         self.gesture = self.position
                     })
             )
         }
         .background(Color(hex: 0x3B3B3B))
         .edgesIgnoringSafeArea(.all)
+    }
+    
+    private func changeCurve(x: CGFloat) -> CGFloat {
+        return 2 * x / log(exp(1.0) + (x < 0 ? -1 : 1) * x)
     }
 }
 
