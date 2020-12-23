@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Example1CapsuleBg: View {
     
-    @State var bind: CGFloat = .zero
+    @Binding var offset: CGFloat
     
     var body: some View {
         GeometryReader { geo in
@@ -25,23 +25,18 @@ struct Example1CapsuleBg: View {
                 .frame(width: width / 2, alignment: .center)
                 
                 // 右侧静态图形
-                Example1CapsuleTemplate(
-                    strokeColor : Color.white.opacity(0.06),
-                    strokerWidth: 2,
-                    color       : Color.white.opacity(0.06)
-                )
-                .frame(width: width / 2, alignment: .center)
+                Example1CapusleWithEmoji(offset: $offset, theme: \.dark)
             }
             .frame(width: width, height: height, alignment: .center)
         }
     }
 }
 
-struct ExampleCapsuleBg_Previews: PreviewProvider {
-    static var previews: some View {
-        Example1CapsuleBg()
-    }
-}
+//struct ExampleCapsuleBg_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Example1CapsuleBg()
+//    }
+//}
 
 struct Example1CapsuleTemplate: View {
     

@@ -16,6 +16,8 @@ let sc: [CGFloat] = [1, 1, 1, 26.3]
 struct Example1: View {
     
     @State var scrollOffset: CGFloat = .zero
+    @State var xScale: CGFloat = .zero
+    @State var xAngle: Angle = .zero
     
     let containerRate: CGFloat = 1.7
     var body: some View {
@@ -28,49 +30,43 @@ struct Example1: View {
             
             Keyframe(scrollOffset, timeLine: timeLine) { f in
                 ZStack(alignment: .center) {
+                    
                     Circle()
                         .frame(width: 44, height: 44)
-                        .foregroundColor(Color(hex: 0xD45E07).opacity(Double(f(co))
-                        ))
+                        .foregroundColor(Color(hex: 0xD45E07).opacity(Double(f(co))))
                         .scaleEffect(f(sc))
                     
-                    Example1CapsuleBg()
+                    Example1CapsuleBg(offset: $scrollOffset)
                         .frame(width: width * 2, height: height, alignment: .center)
+
+                    Example1ScrollView(scrollOffset: $scrollOffset, xScale: $xScale, xAngle: $xAngle, padding: padding)
+                        .frame(width: geo.size.width, height: height)
                     
-//                    Example1ScrollView(scrollOffset: $scrollOffset, xScale: f(cs), xAngle: Angle(degrees: Double(f(keys))))
-//                        .frame(width: geo.size.width)
-                    ScrollViewReader { sv in
-                        ScrollViewOffset(.horizontal, showsIndicators: false) {
-                            scrollOffset = -$0
-                        } content: {
-                            HStack(spacing: 0) {
-                                Rectangle()
-                                    .frame(width: width)
-                                    .foregroundColor(Color.clear)
-
-                                // 顶层动态图形
-                                Example1CapsuleTemplate(
-                                    strokeColor : Color(hex: 0xEFD319).opacity(0.12),
-                                    strokerWidth: 2,
-                                    color       : Color.white
-                                )
-                                .frame(width: width)
-                                .rotationEffect(Angle(degrees: Double(f(keys)) ))
-                                .scaleEffect(f(cs))
-
-                                Rectangle()
-                                    .frame(width: width)
-                                    .foregroundColor(Color.clear)
-                            }
-                            .padding(padding)
-                        }
-                    }
+                    updateScale(f(cs))
+                    updateAngle(f(keys))
                 }
+                .frame(width: geo.size.width, height: geo.size.height)
             }
             
         }
         .background(Color(hex: 0x3B3B3B))
         .edgesIgnoringSafeArea(.all)
+    }
+    
+    /// To update the Capsule scale
+    /// - Parameter scale: given scale
+    /// - Returns:
+    private func updateScale(_ scale: CGFloat) -> some View {
+        xScale = scale
+        return Color.clear
+    }
+    
+    /// To update the Capsule angle
+    /// - Parameter angle: given angle
+    /// - Returns:
+    private func updateAngle(_ angle: CGFloat) -> some View {
+        xAngle = Angle(degrees: Double(angle))
+        return Color.clear
     }
 }
 
