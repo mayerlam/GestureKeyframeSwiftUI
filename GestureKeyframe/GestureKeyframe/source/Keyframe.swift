@@ -98,7 +98,12 @@ public struct Keyframe<Content> : View where Content : View {
     ///         }
     ///     }
     ///
-    /// - Parameter keyFrames: 关键帧的值
+    /// - Parameters:
+    ///   - keyFrames: 关键帧的值
+    ///   - bindIntercept: 将被监控的变化量
+    ///   - timeLine: 关键帧时间线
+    ///   - curveType: path类型
+    ///   - precision: 精度
     /// - Returns: 当前的帧值
     public static func oneDimensionalHandler(_ keyFrames: [CGFloat], _ bindIntercept: CGFloat, timeLine: [CGFloat], curveType: CurveType = .line, precision: CGFloat = 0.001) -> CGFloat {
         
