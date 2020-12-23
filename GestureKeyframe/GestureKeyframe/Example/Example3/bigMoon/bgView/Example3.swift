@@ -1,5 +1,5 @@
 //
-//  BigBgView.swift
+//  Example3.swift
 //  Moon-Animation
 //
 //  Created by Mayer Lam on 2020/12/13.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BigBgView: View {
+struct Example3: View {
     @State private var dragOffset = CGSize.zero
     @State private var position = CGSize.zero
     
@@ -63,6 +63,6 @@ struct BigBgView: View {
 
 struct BigBgView_Previews: PreviewProvider {
     static var previews: some View {
-        BigBgView()
+        Example3()
     }
 }
