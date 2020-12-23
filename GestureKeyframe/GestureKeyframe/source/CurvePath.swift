@@ -12,10 +12,11 @@ protocol CurvePathDelegate {
 }
 
 class BasePath {
-    var nodes: [CGPoint]
+    var nodes: [CGPoint]?
+    
     public var path: Path? {
         if self._path == nil {
-            self._path = self.delegate?.buildPath(nodes)
+            self._path = self.delegate?.buildPath(nodes!)
         }
         return self._path
     }
@@ -24,10 +25,37 @@ class BasePath {
     /// if you want get the `Path` by the given nodes.
     var delegate: CurvePathDelegate?
     
+    /// Get the path begin point
+    private lazy var beginPoint: CGPoint? = {
+        guard let pt = self.path else {
+            return nil
+        }
+        
+        let tinySegment = pt.trimmedPath(from: 0, to: 0.001)
+        return CGPoint(x: tinySegment.boundingRect.midX, y: tinySegment.boundingRect.midY)
+    } ()
+    
+    /// Get the path end point
+    private lazy var endPoint: CGPoint? = {
+        guard let pt = self.path else {
+            return nil
+        }
+        let tinySegment = pt.trimmedPath(from: 0.999, to: 1)
+        return CGPoint(x: tinySegment.boundingRect.midX, y: tinySegment.boundingRect.midY)
+    } ()
+    
     private var _path: Path?
     
+    ///
+    /// - Parameter nodes: the given nodes
     init(_ nodes: [CGPoint]) {
         self.nodes = nodes
+    }
+    
+    ///
+    /// - Parameter path: the given path
+    init(_ path: Path) {
+        self._path = path
     }
     
     /// According to the given X coordinate,
@@ -36,12 +64,10 @@ class BasePath {
     /// - Parameter curX: The given X coordinate
     /// - Returns: Calculated percentage value
     func x2Percent(_ curX: CGFloat) -> CGFloat {
-        guard let beginNode = self.nodes.first else {
+        guard let beginX = self.beginPoint?.x, let endX = self.endPoint?.x else {
             return 0
         }
-        let endNode = self.nodes.last!
-        let beginX = beginNode.x
-        let endX = endNode.x
+        
         let length = endX - beginX
         let delta = curX - beginX
         
@@ -75,10 +101,16 @@ class BasePath {
         return tinySegment.boundingRect.midY
     }
     
+    /// According the given X coordinate
+    /// calculate the k value
+    /// - Parameters:
+    ///   - curX: The given X coordinate
+    ///   - precision: Differential quantities
+    /// - Returns: k value
     func curAngle(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
-
+        
         var weight: CGFloat = 1.00
-
+        
         guard let pt1 = curValue(x: curX, precision: precision),
               var pt2 = curValue(x: curX + weight * precision * 10, precision: precision)
         else {
@@ -88,7 +120,6 @@ class BasePath {
         if pt1 == pt2 {
             weight = -1
             pt2 = curValue(x: curX + weight * precision * 10, precision: precision)!
-            
         }
         
         if pt1 == pt2 {
