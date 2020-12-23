@@ -26,7 +26,7 @@ class BasePath {
     var delegate: CurvePathDelegate?
     
     /// Get the path begin point
-    private lazy var beginPoint: CGPoint? = {
+    lazy var beginPoint: CGPoint? = {
         guard let pt = self.path else {
             return nil
         }
@@ -36,7 +36,7 @@ class BasePath {
     } ()
     
     /// Get the path end point
-    private lazy var endPoint: CGPoint? = {
+    lazy var endPoint: CGPoint? = {
         guard let pt = self.path else {
             return nil
         }
@@ -82,7 +82,11 @@ class BasePath {
     ///   - precision: Differential quantities
     /// - Returns: Y coordinate
     func curValue(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
-        
+        let pect = x2Percent(curX)
+        return curValue(pect: pect, precision: precision)
+    }
+    
+    func curValue(pect: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
         guard let pt = self.path else {
             return nil
         }
@@ -94,7 +98,6 @@ class BasePath {
             return 0
         }
         
-        let pect = x2Percent(curX)
         let from: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1 - precision) : pect
         let to: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1) : pect + precision
         let tinySegment = pt.trimmedPath(from: from, to: to)

@@ -13,6 +13,7 @@
 		0952CF5D259302DA00BAC2B2 /* Example1Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF5C259302DA00BAC2B2 /* Example1Emoji.swift */; };
 		0952CF6125930E2900BAC2B2 /* theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF6025930E2900BAC2B2 /* theme.swift */; };
 		0952CF64259316D800BAC2B2 /* Example1CapusleWithEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF63259316D800BAC2B2 /* Example1CapusleWithEmoji.swift */; };
+		0952CF6C2593455000BAC2B2 /* ShowThePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF6B2593455000BAC2B2 /* ShowThePath.swift */; };
 		0993945F2592369100BE2E5C /* Example1CapsuleBg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */; };
 		0993946425923B1500BE2E5C /* Example1ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993946325923B1500BE2E5C /* Example1ScrollView.swift */; };
 		09A7F77D259205AB00D76CF9 /* ScrollViewOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7F77C259205AB00D76CF9 /* ScrollViewOffset.swift */; };
@@ -39,6 +40,7 @@
 		0952CF5C259302DA00BAC2B2 /* Example1Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1Emoji.swift; sourceTree = "<group>"; };
 		0952CF6025930E2900BAC2B2 /* theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = theme.swift; sourceTree = "<group>"; };
 		0952CF63259316D800BAC2B2 /* Example1CapusleWithEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1CapusleWithEmoji.swift; sourceTree = "<group>"; };
+		0952CF6B2593455000BAC2B2 /* ShowThePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowThePath.swift; sourceTree = "<group>"; };
 		0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1CapsuleBg.swift; sourceTree = "<group>"; };
 		0993946325923B1500BE2E5C /* Example1ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1ScrollView.swift; sourceTree = "<group>"; };
 		09A7F77C259205AB00D76CF9 /* ScrollViewOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffset.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 			path = Example1;
 			sourceTree = "<group>";
 		};
+		0952CF6A2593452B00BAC2B2 /* UnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				0952CF6B2593455000BAC2B2 /* ShowThePath.swift */,
+			);
+			path = UnitTest;
+			sourceTree = "<group>";
+		};
 		09BC46DF258DECD900A040F1 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 			children = (
 				09BC4727258E026700A040F1 /* source */,
 				09BC4705258DFD7700A040F1 /* Example */,
+				0952CF6A2593452B00BAC2B2 /* UnitTest */,
 				09BC46EB258DECD900A040F1 /* GestureKeyframeApp.swift */,
 				09BC46ED258DECD900A040F1 /* ContentView.swift */,
 				09BC46EF258DECDD00A040F1 /* Assets.xcassets */,
@@ -274,6 +285,7 @@
 				093C2C6E258F777400202AE9 /* Navigator.swift in Sources */,
 				093C2C6A258F773200202AE9 /* Example1.swift in Sources */,
 				093C2C65258F753700202AE9 /* Example2.swift in Sources */,
+				0952CF6C2593455000BAC2B2 /* ShowThePath.swift in Sources */,
 				09BC46EC258DECD900A040F1 /* GestureKeyframeApp.swift in Sources */,
 				09BC4719258DFE6C00A040F1 /* UIColorHelper.swift in Sources */,
 				09BC4713258DFE2D00A040F1 /* StonePitParameters.swift in Sources */,
