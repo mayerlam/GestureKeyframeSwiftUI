@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Example1CapsuleBg: View {
     
-    @Binding var offset: CGFloat
+    @EnvironmentObject var scrollView: ViewDidScroll
     
     var body: some View {
         GeometryReader { geo in
@@ -25,18 +25,18 @@ struct Example1CapsuleBg: View {
                 .frame(width: width / 2, alignment: .center)
                 
                 // 右侧静态图形
-                Example1CapusleWithEmoji(offset: $offset, theme: \.dark)
+                Example1CapusleWithEmoji(theme: \.dark, widthKF: [12, 6], offsetKF: [0, -3.96])
             }
             .frame(width: width, height: height, alignment: .center)
         }
     }
 }
 
-//struct ExampleCapsuleBg_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Example1CapsuleBg()
-//    }
-//}
+struct ExampleCapsuleBg_Previews: PreviewProvider {
+    static var previews: some View {
+        Example1CapsuleBg()
+    }
+}
 
 struct Example1CapsuleTemplate: View {
     

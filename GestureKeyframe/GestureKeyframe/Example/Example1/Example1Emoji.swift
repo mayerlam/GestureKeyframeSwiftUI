@@ -9,10 +9,13 @@ import SwiftUI
 
 struct Example1Emoji: View {
     
-    @Binding var offset:CGFloat
+    @EnvironmentObject var scrollView: ViewDidScroll
     
     /// The emoji color theme
     var theme: KeyPath<Themes, Example1Theme> = \.light
+    
+    var widthKF: [CGFloat] = [12, 12] //[12, 6]
+    var offsetKF: [CGFloat] = [0, 0] //[0, -3.96]
     
     private var _theme: Example1Theme {
         Themes()[keyPath: theme]
@@ -22,7 +25,8 @@ struct Example1Emoji: View {
         GeometryReader { geo in
             let size = min(geo.size.width, geo.size.height)
             let scale: CGFloat = size / 30.0
-            Keyframe(offset, timeLine: [0, 136.0]) { value in
+            let restWidth = (size + widthKF.first! * scale) / 2
+            Keyframe(scrollView.offset, timeLine: [0, 136.0]) { value in
                 ZStack {
                     Circle()
                         .frame(width: size, height: size)
@@ -40,14 +44,16 @@ struct Example1Emoji: View {
                     }
                     .frame(width: 14 * scale)
                     .offset(y: -2 * scale)
-                    .offset(x: value([0, -3.96]) * scale)
+                    .offset(x: value(offsetKF) * scale)
                     
                     HStack {
                         Spacer()
+                            
                         mouth()
-                            .frame(width: value([12, 6]) * scale, height: 4 * scale, alignment: .leading)
+                            .frame(width: value(widthKF) * scale, height: 4 * scale, alignment: .leading)
                             .offset(y: 7 * scale)
                         Spacer()
+                            .frame(width: restWidth - value(widthKF) * scale, height: 1)
                     }
                 }
             }
@@ -63,14 +69,16 @@ struct Example1Emoji: View {
     }
 }
 
-//
-//struct Example1Emoji_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Example1Emoji(theme: \.light)
-//            .previewLayout(.fixed(width: 300, height: 300))
-//
-//        Example1Emoji(theme: \.dark)
-//            .previewLayout(.fixed(width: 300, height: 300))
-//            .background(Color(hex: 0x3B3B3B))
-//    }
-//}
+
+struct Example1Emoji_Previews: PreviewProvider {
+    static var previews: some View {
+        let ob = ViewDidScroll()
+        Example1Emoji(theme: \.light)
+            .previewLayout(.fixed(width: 300, height: 300))
+            .environmentObject(ob)
+        Example1Emoji(theme: \.dark)
+            .previewLayout(.fixed(width: 300, height: 300))
+            .background(Color(hex: 0x3B3B3B))
+            .environmentObject(ob)
+    }
+}

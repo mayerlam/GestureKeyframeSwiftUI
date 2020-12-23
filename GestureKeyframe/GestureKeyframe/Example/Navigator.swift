@@ -9,10 +9,11 @@ import SwiftUI
 
 struct Navigator: View {
     var body: some View {
+        let ob = ViewDidScroll()
         NavigationView {
             List {
                 Section {
-                    NavigationLink(destination: Example1(), label: {
+                    NavigationLink(destination: Example1().environmentObject(ob), label: {
                             Text("Example1")
                         })
                     NavigationLink(destination: Example2(), label: {

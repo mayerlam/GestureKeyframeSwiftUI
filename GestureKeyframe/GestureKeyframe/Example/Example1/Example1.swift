@@ -14,11 +14,8 @@ let co: [CGFloat] = [0, 0, 0, 1]
 let sc: [CGFloat] = [1, 1, 1, 26.3]
 
 struct Example1: View {
-    
-    @State var scrollOffset: CGFloat = .zero
-    @State var xScale: CGFloat = .zero
-    @State var xAngle: Angle = .zero
-    
+    @EnvironmentObject var scrollView: ViewDidScroll
+
     let containerRate: CGFloat = 1.7
     var body: some View {
 
@@ -28,7 +25,7 @@ struct Example1: View {
             let height = size / 2
             let padding = geo.size.width / 2.0 - width
             
-            Keyframe(scrollOffset, timeLine: timeLine) { f in
+            Keyframe(scrollView.offset, timeLine: timeLine) { f in
                 ZStack(alignment: .center) {
                     
                     Circle()
@@ -36,46 +33,23 @@ struct Example1: View {
                         .foregroundColor(Color(hex: 0xD45E07).opacity(Double(f(co))))
                         .scaleEffect(f(sc))
                     
-                    Example1CapsuleBg(offset: $scrollOffset)
+                    Example1CapsuleBg()
                         .frame(width: width * 2, height: height, alignment: .center)
-
-                    Example1ScrollView(scrollOffset: $scrollOffset, xScale: $xScale, xAngle: $xAngle, padding: padding)
+                    Example1ScrollView(padding: padding)
                         .frame(width: geo.size.width, height: height)
-                    
-                    updateScale(f(cs))
-                    updateAngle(f(keys))
                 }
                 .frame(width: geo.size.width, height: geo.size.height)
             }
-            
         }
         .background(Color(hex: 0x3B3B3B))
         .edgesIgnoringSafeArea(.all)
-    }
-    
-    /// To update the Capsule scale
-    /// - Parameter scale: given scale
-    /// - Returns:
-    private func updateScale(_ scale: CGFloat) -> some View {
-        xScale = scale
-        return Color.clear
-    }
-    
-    /// To update the Capsule angle
-    /// - Parameter angle: given angle
-    /// - Returns:
-    private func updateAngle(_ angle: CGFloat) -> some View {
-        xAngle = Angle(degrees: Double(angle))
-        return Color.clear
     }
 }
 
 struct Example1_Previews: PreviewProvider {
     static var previews: some View {
+        let ob = ViewDidScroll()
         Example1()
-        Example1CapsuleTemplate(strokeColor: Color(hex: 0xEFD319).opacity(0.12), strokerWidth: 2, color: .blue)
-            .previewLayout(.fixed(width: 300, height: 100))
-        Example1CapsuleTemplate(strokeColor: Color(hex: 0xEFD319).opacity(0.12), strokerWidth: 2, color: .blue)
-            .previewLayout(.fixed(width: 159.7, height: 187.3))
+            .environmentObject(ob)
     }
 }
