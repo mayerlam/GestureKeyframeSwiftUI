@@ -74,6 +74,33 @@ class BasePath {
         return delta < 0 ? 0 : ( delta > (endX - beginX) ? 1 : delta / length)
     }
     
+    /// According to the given percent
+    /// calculate the X coordinate
+    ///
+    /// - Parameter pect: The given pect
+    /// - Returns: Calculated x coordinate
+    func percent2X(_ pect: CGFloat) -> CGFloat? {
+        return curPoint(pect: pect)?.x
+    }
+    
+    func curPoint(pect: CGFloat, precision: CGFloat = 0.001) -> CGPoint? {
+        guard let pt = self.path else {
+            return nil
+        }
+        
+        /// As the precision, it should be a very small number.
+        /// Even you give a bigger number, the program still run ok
+        /// But it always return `0`
+        guard precision < 1 else {
+            return .zero
+        }
+        
+        let from: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1 - precision) : pect
+        let to: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1) : pect + precision
+        let tinySegment = pt.trimmedPath(from: from, to: to)
+        return CGPoint(x: tinySegment.boundingRect.midX, y: tinySegment.boundingRect.midY)
+    }
+    
     /// According to the given X coordinate,
     /// calculate the Y coordinate
     ///
@@ -86,22 +113,45 @@ class BasePath {
         return curValue(pect: pect, precision: precision)
     }
     
+    
+    /// According to the given percent,
+    /// calculate the Y coordinate
+    ///
+    /// - Parameters:
+    ///   - pect: The given pect
+    ///   - precision: Differential quantities
+    /// - Returns: Y coordinate
     func curValue(pect: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
-        guard let pt = self.path else {
+        return curPoint(pect: pect, precision: precision)?.y
+    }
+    
+    /// According to the given percent
+    /// calculate the k value
+    ///
+    /// - Parameters:
+    ///   - pect: The given pect
+    ///   - precision: Differential quantities
+    /// - Returns: k value
+    func curAngle(pect: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
+        var weight: CGFloat = 1.00
+        
+        guard let pt1 = curPoint(pect: pect, precision: precision),
+              var pt2 = curPoint(pect: pect + weight * precision * 10, precision: precision)
+        else {
             return nil
         }
         
-        /// As the precision, it should be a very small number.
-        /// Even you give a bigger number, the program still run ok
-        /// But it always return `0`
-        guard precision < 1 else {
-            return 0
+        if pt1 == pt2 {
+            weight = -1
+            pt2 = curPoint(pect: pect + weight * precision * 10, precision: precision)!
         }
         
-        let from: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1 - precision) : pect
-        let to: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1) : pect + precision
-        let tinySegment = pt.trimmedPath(from: from, to: to)
-        return tinySegment.boundingRect.midY
+        if pt1 == pt2 {
+            return CGFloat.nan
+        }
+        
+        let k = (pt2.y - pt1.y) / (pt2.x - pt1.x)
+        return k
     }
     
     /// According the given X coordinate
@@ -112,25 +162,8 @@ class BasePath {
     /// - Returns: k value
     func curAngle(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
         
-        var weight: CGFloat = 1.00
-        
-        guard let pt1 = curValue(x: curX, precision: precision),
-              var pt2 = curValue(x: curX + weight * precision * 10, precision: precision)
-        else {
-            return nil
-        }
-        
-        if pt1 == pt2 {
-            weight = -1
-            pt2 = curValue(x: curX + weight * precision * 10, precision: precision)!
-        }
-        
-        if pt1 == pt2 {
-            return nil
-        }
-        
-        let k = (pt2 - pt1) / (weight * precision * 10)
-        return CGFloat(atan(k))
+        let pect = x2Percent(curX)
+        return curAngle(pect: pect, precision: precision)
     }
 }
 
