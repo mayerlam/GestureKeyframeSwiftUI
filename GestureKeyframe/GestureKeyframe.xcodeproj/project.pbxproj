@@ -133,6 +133,15 @@
 			path = public;
 			sourceTree = "<group>";
 		};
+		092AE51A2594922C009F12CC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				091D0D9325948EE4000717A2 /* KFPoint.swift */,
+				091D0D9025948ED4000717A2 /* alias.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		093C2C63258F73EB00202AE9 /* Example2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,12 +267,11 @@
 		09BC4727258E026700A040F1 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				092AE51A2594922C009F12CC /* Helpers */,
 				091D0D8E259484CC000717A2 /* Curves */,
 				09BC46FC258DF9C100A040F1 /* Keyframe.swift */,
 				09BC46FF258DFB2200A040F1 /* CurvePathDelegate.swift */,
 				092839F225946F2D0079F723 /* BasePath.swift */,
-				091D0D9025948ED4000717A2 /* alias.swift */,
-				091D0D9325948EE4000717A2 /* KFPoint.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
