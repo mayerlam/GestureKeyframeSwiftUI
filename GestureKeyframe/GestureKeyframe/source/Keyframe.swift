@@ -26,10 +26,17 @@ public struct Keyframe<Content> : View where Content : View {
     
     public var body: Content
     
+    public init (bindPect: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
+        func gen(_ keyFrames: [CGFloat]) -> CGFloat {
+            return Keyframe.oneDimensionalHandler(keyFrames, bindPect: bindPect, timeLine: timeLine, curveType: curveType, precision: precision)
+        }
+        self.body = content(gen)
+    }
+    
     public init (_ bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
         
         func gen(_ keyFrames: [CGFloat]) -> CGFloat {
-            return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept, timeLine: timeLine, curveType: curveType, precision: precision)
+            return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept: bindIntercept, timeLine: timeLine, curveType: curveType, precision: precision)
         }
         
         self.body = content(gen)
@@ -47,10 +54,10 @@ public struct Keyframe<Content> : View where Content : View {
         func gen(_ keyFrames: [CGFloat], _ use: UseCoordinate) -> CGFloat {
             if use == .x {
                 let tl: FAxis = Set(timeLine.map { $0.x })
-                return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept.x, timeLine: tl, curveType: curveType, precision: precision)
+                return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept: bindIntercept.x, timeLine: tl, curveType: curveType, precision: precision)
             } else  {
                 let tl: FAxis = Set(timeLine.map { $0.y })
-                return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept.y, timeLine: tl, curveType: curveType, precision: precision)
+                return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept: bindIntercept.y, timeLine: tl, curveType: curveType, precision: precision)
             }
         }
         
@@ -62,15 +69,25 @@ public struct Keyframe<Content> : View where Content : View {
         self.init(point, timeLine: timeLine, content: content)
     }
     
+    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType, precision: CGFloat = 0.001) -> CGFloat {
+        guard timeLine.count > 1 else {
+            return .nan
+        }
+        /// 对时间线进行排序
+        let timeLineAsc = timeLine.sorted(by: <)
+        let pect = bindIntercept / ( timeLineAsc.last! - timeLineAsc.first!)
+        return Keyframe.oneDimensionalHandler(keyFrames, bindPect: pect, timeLine: timeLine, curveType: curveType, precision: precision)
+    }
+    
     /// `oneDimensionalHandler`生成函数
     /// 是一个通过变化曲线`path`，以及给定指针x坐标而映射得到对应的值
     /// 可以应用在只提供若干关键帧，而推算出所有的变化
     ///
-    /// 在AutoGesture初始化时，绑定了`bindIntercept`
+    /// 在AutoGesture初始化时，绑定了`bindPect`
     /// 以及设定了数组`timeLine`
     /// 将`timeLine`作为x坐标, `keyFrames` 作为y坐标，构建一个点集
     /// 通过这个点集生成一个变化曲线`path`
-    /// 最后，由于`bindIntercept`的变化映射成`x`坐标，再通过`path`
+    /// 最后，由于`bindPect`的变化映射成`x`坐标(百分比)，再通过`path`
     /// 映射得到对应的`value`值，下面是应用在SwiftUI中的例子:
     ///
     ///     @State var gestureOffset: CGSize
@@ -101,12 +118,12 @@ public struct Keyframe<Content> : View where Content : View {
     ///
     /// - Parameters:
     ///   - keyFrames: 关键帧的值
-    ///   - bindIntercept: 将被监控的变化量
+    ///   - bindPect: 将被监控的变化量
     ///   - timeLine: 关键帧时间线
     ///   - curveType: path类型
     ///   - precision: 精度
     /// - Returns: 当前的帧值
-    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], _ bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType, precision: CGFloat = 0.001) -> CGFloat {
+    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], bindPect: CGFloat, timeLine: FAxis, curveType: CurveType, precision: CGFloat = 0.001) -> CGFloat {
         
         /// 对时间线进行排序
         let timeLineAsc = timeLine.sorted(by: <)
@@ -127,10 +144,10 @@ public struct Keyframe<Content> : View where Content : View {
              * We use the `basePath.curValue(x: CGFloat, precision: CGFloat)` method
              * Because we think the keyframe-path suppose an single-value function
              */
-            return timeLineCurv.curValue(x: bindIntercept, precision: precision)!
+            return timeLineCurv.curValue(pect: bindPect, precision: precision)!
         case .Cubic:
             let curve = CubicCurve(nodes)
-            return curve.curValue(x: bindIntercept, precision: precision)!
+            return curve.curValue(pect: bindPect, precision: precision)!
         }
     }
 }

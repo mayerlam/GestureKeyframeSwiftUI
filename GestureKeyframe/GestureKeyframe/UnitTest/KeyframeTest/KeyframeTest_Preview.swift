@@ -15,7 +15,7 @@ struct KeyframeTestView: View {
     
     var body: some View {
         
-        Keyframe((x / 100) * (testNodes3.last!.x - testNodes3.first!.x) + 100, timeLine: Set(testNodes3.map { $0.x }), curveType: .line) { value in
+        Keyframe(bindPect: x / 100, timeLine: Set(testNodes3.map { $0.x }), curveType: .line) { value in
             VStack {
                 Text("\(x), \(value([200, 300, 150, 350, 300, 400]))")
                 ShowThePath(celsius: $x, curve: curve) { _ in
