@@ -14,18 +14,17 @@ struct Navigator: View {
             List {
                 Section {
                     NavigationLink(destination: Example1().environmentObject(ob), label: {
-                            Text("Example1")
-                        })
+                        Text("Example1")
+                    })
                     NavigationLink(destination: Example2(), label: {
-                            Text("Example2")
-                        })
+                        Text("Example2")
+                    })
                     NavigationLink(destination: Example3(), label: {
-                            Text("Example3")
-                        })
+                        Text("Example3")
+                    })
                 }
             }
         }
-
     }
 }
 

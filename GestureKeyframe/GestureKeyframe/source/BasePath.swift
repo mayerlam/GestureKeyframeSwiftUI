@@ -1,15 +1,12 @@
 //
-//  CurvePath.swift
+//  BasePath.swift
 //  GestureKeyframe
 //
-//  Created by Mayer Lam on 2020/12/19.
+//  Created by Mayer Lam on 2020/12/24.
 //
 
 import SwiftUI
 
-protocol CurvePathDelegate {
-    func buildPath(_ nodes: [CGPoint]) -> Path
-}
 
 class BasePath {
     var nodes: [CGPoint]?
@@ -57,23 +54,7 @@ class BasePath {
     init(_ path: Path) {
         self._path = path
     }
-    
-    /// According to the given X coordinate,
-    /// calculate the percentage from the start point of path
-    ///
-    /// - Parameter curX: The given X coordinate
-    /// - Returns: Calculated percentage value
-    func x2Percent(_ curX: CGFloat) -> CGFloat {
-        guard let beginX = self.beginPoint?.x, let endX = self.endPoint?.x else {
-            return 0
-        }
-        
-        let length = endX - beginX
-        let delta = curX - beginX
-        
-        return delta < 0 ? 0 : ( delta > (endX - beginX) ? 1 : delta / length)
-    }
-    
+
     /// According to the given percent
     /// calculate the X coordinate
     ///
@@ -100,20 +81,7 @@ class BasePath {
         let tinySegment = pt.trimmedPath(from: from, to: to)
         return CGPoint(x: tinySegment.boundingRect.midX, y: tinySegment.boundingRect.midY)
     }
-    
-    /// According to the given X coordinate,
-    /// calculate the Y coordinate
-    ///
-    /// - Parameters:
-    ///   - curX: The given X coordinate
-    ///   - precision: Differential quantities
-    /// - Returns: Y coordinate
-    func curValue(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
-        let pect = x2Percent(curX)
-        return curValue(pect: pect, precision: precision)
-    }
-    
-    
+
     /// According to the given percent,
     /// calculate the Y coordinate
     ///
@@ -151,42 +119,58 @@ class BasePath {
         }
         
         let k = (pt2.y - pt1.y) / (pt2.x - pt1.x)
-        return k
+        return CGFloat(atan(k))
+    }
+}
+
+extension BasePath {
+    /**
+     *  Warning:
+     *  The following methods are available
+     *  if and only if the given path is a single-valued function.
+     *
+     *  Even if not, these function still runable,
+     *  But it won't be the result you expect.
+     */
+    
+    /// According to the given X coordinate,
+    /// calculate the percentage from the start point of path
+    ///
+    /// - Parameter curX: The given X coordinate
+    /// - Returns: Calculated percentage value
+    func x2Percent(_ curX: CGFloat) -> CGFloat {
+        
+        guard let beginX = self.beginPoint?.x, let endX = self.endPoint?.x else {
+            return 0
+        }
+        
+        let length = endX - beginX
+        let delta = curX - beginX
+        
+        return delta < 0 ? 0 : ( delta > (endX - beginX) ? 1 : delta / length)
+    }
+    
+    /// According to the given X coordinate,
+    /// calculate the Y coordinate
+    ///
+    /// - Parameters:
+    ///   - curX: The given X coordinate
+    ///   - precision: Differential quantities
+    /// - Returns: Y coordinate
+    func curValue(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
+        let pect = x2Percent(curX)
+        return curValue(pect: pect, precision: precision)
     }
     
     /// According the given X coordinate
     /// calculate the k value
+    ///
     /// - Parameters:
     ///   - curX: The given X coordinate
     ///   - precision: Differential quantities
     /// - Returns: k value
     func curAngle(x curX: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
-        
         let pect = x2Percent(curX)
         return curAngle(pect: pect, precision: precision)
-    }
-}
-
-/// The poly-line time curve that conforms TimeLineCurve
-/// In fact, it's a piecewise function
-/// and each sub-functions are linear function
-class PolylineCurve: BasePath, CurvePathDelegate {
-
-    override init(_ nodes: [CGPoint]) {
-        super.init(nodes)
-        self.delegate = self
-    }
-    
-    func buildPath(_ nodes: [CGPoint]) -> Path {
-        var path = Path()
-        
-        for i in 0..<nodes.count {
-            if i == 0 {
-                path.move(to: nodes[i])
-            } else {
-                path.addLine(to: nodes[i])
-            }
-        }
-        return path
     }
 }
