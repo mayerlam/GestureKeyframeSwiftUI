@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let timeLine: [CGFloat] = [0, 60, 110, 136]
+let timeLine: FAxis = [0, 60, 110, 136]
 let keys: [CGFloat] = [0, 9.96, 3.29, 0]
 let cs: [CGFloat] = [1, 1.1, 1.03, 1]
 let co: [CGFloat] = [0, 0, 0, 1]

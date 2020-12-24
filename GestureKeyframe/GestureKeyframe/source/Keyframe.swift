@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+
+public typealias FAxis = Set<CGFloat>
+public typealias PTAxis = Set<KFPoint>
+
 public enum UseCoordinate {
     case x
     case y
@@ -25,7 +29,7 @@ public struct Keyframe<Content> : View where Content : View {
     
     public var body: Content
     
-    public init (_ bindIntercept: CGFloat, timeLine: [CGFloat], curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
+    public init (_ bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
         
         func gen(_ keyFrames: [CGFloat]) -> CGFloat {
             return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept, timeLine: timeLine, curveType: curveType, precision: precision)
@@ -41,14 +45,14 @@ public struct Keyframe<Content> : View where Content : View {
     ///   - curveType: 构造的曲线类型
     ///   - precision: 计算精度
     ///   - content: 用以代理渲染视图
-    public init (_ bindIntercept: CGPoint, timeLine: [CGPoint], curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
+    public init (_ bindIntercept: CGPoint, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
 
         func gen(_ keyFrames: [CGFloat], _ use: UseCoordinate) -> CGFloat {
             if use == .x {
-                let tl: [CGFloat] = timeLine.map { $0.x }
+                let tl: FAxis = Set(timeLine.map { $0.x })
                 return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept.x, timeLine: tl, curveType: curveType, precision: precision)
             } else  {
-                let tl: [CGFloat] = timeLine.map { $0.y }
+                let tl: FAxis = Set(timeLine.map { $0.y })
                 return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept.y, timeLine: tl, curveType: curveType, precision: precision)
             }
         }
@@ -56,7 +60,7 @@ public struct Keyframe<Content> : View where Content : View {
         self.body = content(gen)
     }
     
-    public init (_ bindIntercept: CGSize, timeLine: [CGPoint], curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
+    public init (_ bindIntercept: CGSize, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
         let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
         self.init(point, timeLine: timeLine, content: content)
     }
@@ -105,12 +109,12 @@ public struct Keyframe<Content> : View where Content : View {
     ///   - curveType: path类型
     ///   - precision: 精度
     /// - Returns: 当前的帧值
-    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], _ bindIntercept: CGFloat, timeLine: [CGFloat], curveType: CurveType = .line, precision: CGFloat = 0.001) -> CGFloat {
+    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], _ bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001) -> CGFloat {
         
         /// 对时间线进行排序
-        let timeLine_s = timeLine.sorted(by: <)
-        let ml = min(timeLine_s.count, keyFrames.count)
-        let tl = timeLine_s[0..<ml]
+        let timeLineAsc = timeLine.sorted(by: <)
+        let ml = min(timeLineAsc.count, keyFrames.count)
+        let tl = timeLineAsc[0..<ml]
         let kf = keyFrames[0..<ml]
         
         var nodes: [CGPoint] = []

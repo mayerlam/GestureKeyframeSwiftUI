@@ -69,10 +69,10 @@ struct BigFaceView: View {
         }
     }
     
-    private let keyPoint = [
-        CGPoint(x: -102.00, y: -93.00),
-        CGPoint(x: 0.00, y: 0.00),
-        CGPoint(x: 108, y: 93.00)
+    private let keyPoint: PTAxis = [
+        KFPoint(x: -102.00, y: -93.00),
+        KFPoint(x: 0.00, y: 0.00),
+        KFPoint(x: 108, y: 93.00)
     ]
     
     private let size: (CGFloat, CGFloat) = (19, 85)
