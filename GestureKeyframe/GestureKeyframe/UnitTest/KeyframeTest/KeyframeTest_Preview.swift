@@ -10,15 +10,14 @@ import SwiftUI
 struct KeyframeTestView: View {
 
     @State var x: CGFloat = .zero
-    let curve = CubicCurve(testNodes3)
-    let valus: [CGFloat] = testNodes3.map { $0.y }
+    let curve = CubicCurve(testNodes)
     
     var body: some View {
         
-        Keyframe(bindPect: x / 100, timeLine: Set(testNodes3.map { $0.x }), curveType: .Cubic) { value in
+        Keyframe(bindPect: x / 100, timeLine: Set(testNodes.map { $0.x }), curveType: .Cubic) { value in
             VStack {
                 ShowThePath(celsius: $x, curve: curve) { _ in
-                    value(testNodes3.map { $0.y })
+                    value(testNodes.map { $0.y })
                 }
             }
         }
