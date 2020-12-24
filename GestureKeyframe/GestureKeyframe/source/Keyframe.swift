@@ -122,6 +122,10 @@ public struct Keyframe<Content> : View where Content : View {
         switch curveType {
             case .line:
                 let timeLineCurv = PolylineCurve(nodes)
+                /**
+                 * We use the `basePath.curValue(x: CGFloat, precision: CGFloat)` method
+                 * Because we think the keyframe-path suppose an single-value function
+                 */
                 return timeLineCurv.curValue(x: bindIntercept, precision: precision)!
             default:
                 return .zero

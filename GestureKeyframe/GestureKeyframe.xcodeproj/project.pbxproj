@@ -7,12 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091D0D8A25948463000717A2 /* CubicCurve_Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091D0D8925948463000717A2 /* CubicCurve_Previews.swift */; };
+		092839EF2594382B0079F723 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092839EE2594382B0079F723 /* PathView.swift */; };
+		092839F325946F2D0079F723 /* BasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092839F225946F2D0079F723 /* BasePath.swift */; };
+		092839F625946F530079F723 /* PolylineCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092839F525946F530079F723 /* PolylineCurve.swift */; };
+		092839FC2594729A0079F723 /* CubicCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092839FB2594729A0079F723 /* CubicCurve.swift */; };
+		09283A02259474010079F723 /* InfinityShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09283A01259474010079F723 /* InfinityShape.swift */; };
 		093C2C65258F753700202AE9 /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C64258F753700202AE9 /* Example2.swift */; };
 		093C2C6A258F773200202AE9 /* Example1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C69258F773200202AE9 /* Example1.swift */; };
 		093C2C6E258F777400202AE9 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C6D258F777400202AE9 /* Navigator.swift */; };
+		094838D0259474B2000224DA /* TestNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094838CF259474B2000224DA /* TestNodes.swift */; };
 		0952CF5D259302DA00BAC2B2 /* Example1Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF5C259302DA00BAC2B2 /* Example1Emoji.swift */; };
 		0952CF6125930E2900BAC2B2 /* theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF6025930E2900BAC2B2 /* theme.swift */; };
 		0952CF64259316D800BAC2B2 /* Example1CapusleWithEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF63259316D800BAC2B2 /* Example1CapusleWithEmoji.swift */; };
+		0952CF6C2593455000BAC2B2 /* ShowThePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF6B2593455000BAC2B2 /* ShowThePath.swift */; };
 		0993945F2592369100BE2E5C /* Example1CapsuleBg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */; };
 		0993946425923B1500BE2E5C /* Example1ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993946325923B1500BE2E5C /* Example1ScrollView.swift */; };
 		09A7F77D259205AB00D76CF9 /* ScrollViewOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7F77C259205AB00D76CF9 /* ScrollViewOffset.swift */; };
@@ -22,7 +30,7 @@
 		09BC46F0258DECDD00A040F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BC46EF258DECDD00A040F1 /* Assets.xcassets */; };
 		09BC46F3258DECDD00A040F1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BC46F2258DECDD00A040F1 /* Preview Assets.xcassets */; };
 		09BC46FD258DF9C200A040F1 /* Keyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46FC258DF9C100A040F1 /* Keyframe.swift */; };
-		09BC4700258DFB2200A040F1 /* CurvePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46FF258DFB2200A040F1 /* CurvePath.swift */; };
+		09BC4700258DFB2200A040F1 /* CurvePathDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46FF258DFB2200A040F1 /* CurvePathDelegate.swift */; };
 		09BC4711258DFE2D00A040F1 /* Example3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC470C258DFE2D00A040F1 /* Example3.swift */; };
 		09BC4712258DFE2D00A040F1 /* StonePitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC470D258DFE2D00A040F1 /* StonePitView.swift */; };
 		09BC4713258DFE2D00A040F1 /* StonePitParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC470E258DFE2D00A040F1 /* StonePitParameters.swift */; };
@@ -33,12 +41,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		091D0D8925948463000717A2 /* CubicCurve_Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicCurve_Previews.swift; sourceTree = "<group>"; };
+		092839EE2594382B0079F723 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
+		092839F225946F2D0079F723 /* BasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePath.swift; sourceTree = "<group>"; };
+		092839F525946F530079F723 /* PolylineCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolylineCurve.swift; sourceTree = "<group>"; };
+		092839FB2594729A0079F723 /* CubicCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicCurve.swift; sourceTree = "<group>"; };
+		09283A01259474010079F723 /* InfinityShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityShape.swift; sourceTree = "<group>"; };
 		093C2C64258F753700202AE9 /* Example2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2.swift; sourceTree = "<group>"; };
 		093C2C69258F773200202AE9 /* Example1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1.swift; sourceTree = "<group>"; };
 		093C2C6D258F777400202AE9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		094838CF259474B2000224DA /* TestNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNodes.swift; sourceTree = "<group>"; };
 		0952CF5C259302DA00BAC2B2 /* Example1Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1Emoji.swift; sourceTree = "<group>"; };
 		0952CF6025930E2900BAC2B2 /* theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = theme.swift; sourceTree = "<group>"; };
 		0952CF63259316D800BAC2B2 /* Example1CapusleWithEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1CapusleWithEmoji.swift; sourceTree = "<group>"; };
+		0952CF6B2593455000BAC2B2 /* ShowThePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowThePath.swift; sourceTree = "<group>"; };
 		0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1CapsuleBg.swift; sourceTree = "<group>"; };
 		0993946325923B1500BE2E5C /* Example1ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1ScrollView.swift; sourceTree = "<group>"; };
 		09A7F77C259205AB00D76CF9 /* ScrollViewOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffset.swift; sourceTree = "<group>"; };
@@ -50,7 +66,7 @@
 		09BC46F2258DECDD00A040F1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		09BC46F4258DECDD00A040F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09BC46FC258DF9C100A040F1 /* Keyframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyframe.swift; sourceTree = "<group>"; };
-		09BC46FF258DFB2200A040F1 /* CurvePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvePath.swift; sourceTree = "<group>"; };
+		09BC46FF258DFB2200A040F1 /* CurvePathDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvePathDelegate.swift; sourceTree = "<group>"; };
 		09BC470C258DFE2D00A040F1 /* Example3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example3.swift; sourceTree = "<group>"; };
 		09BC470D258DFE2D00A040F1 /* StonePitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StonePitView.swift; sourceTree = "<group>"; };
 		09BC470E258DFE2D00A040F1 /* StonePitParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StonePitParameters.swift; sourceTree = "<group>"; };
@@ -71,6 +87,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		091D0D8D259484AD000717A2 /* KeyframeTest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = KeyframeTest;
+			sourceTree = "<group>";
+		};
+		091D0D8E259484CC000717A2 /* Curves */ = {
+			isa = PBXGroup;
+			children = (
+				092839F525946F530079F723 /* PolylineCurve.swift */,
+				092839FB2594729A0079F723 /* CubicCurve.swift */,
+			);
+			path = Curves;
+			sourceTree = "<group>";
+		};
+		092839F8259471810079F723 /* BasePathTest */ = {
+			isa = PBXGroup;
+			children = (
+				09283A01259474010079F723 /* InfinityShape.swift */,
+			);
+			path = BasePathTest;
+			sourceTree = "<group>";
+		};
+		092839FE2594736D0079F723 /* CubicCurveTest */ = {
+			isa = PBXGroup;
+			children = (
+				091D0D8925948463000717A2 /* CubicCurve_Previews.swift */,
+			);
+			path = CubicCurveTest;
+			sourceTree = "<group>";
+		};
+		092839FF259473870079F723 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				092839EE2594382B0079F723 /* PathView.swift */,
+				0952CF6B2593455000BAC2B2 /* ShowThePath.swift */,
+				094838CF259474B2000224DA /* TestNodes.swift */,
+			);
+			path = public;
+			sourceTree = "<group>";
+		};
 		093C2C63258F73EB00202AE9 /* Example2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +149,17 @@
 				0952CF63259316D800BAC2B2 /* Example1CapusleWithEmoji.swift */,
 			);
 			path = Example1;
+			sourceTree = "<group>";
+		};
+		0952CF6A2593452B00BAC2B2 /* UnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				092839FF259473870079F723 /* public */,
+				092839FE2594736D0079F723 /* CubicCurveTest */,
+				092839F8259471810079F723 /* BasePathTest */,
+				091D0D8D259484AD000717A2 /* KeyframeTest */,
+			);
+			path = UnitTest;
 			sourceTree = "<group>";
 		};
 		09BC46DF258DECD900A040F1 = {
@@ -114,6 +183,7 @@
 			children = (
 				09BC4727258E026700A040F1 /* source */,
 				09BC4705258DFD7700A040F1 /* Example */,
+				0952CF6A2593452B00BAC2B2 /* UnitTest */,
 				09BC46EB258DECD900A040F1 /* GestureKeyframeApp.swift */,
 				09BC46ED258DECD900A040F1 /* ContentView.swift */,
 				09BC46EF258DECDD00A040F1 /* Assets.xcassets */,
@@ -184,8 +254,10 @@
 		09BC4727258E026700A040F1 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				091D0D8E259484CC000717A2 /* Curves */,
 				09BC46FC258DF9C100A040F1 /* Keyframe.swift */,
-				09BC46FF258DFB2200A040F1 /* CurvePath.swift */,
+				09BC46FF258DFB2200A040F1 /* CurvePathDelegate.swift */,
+				092839F225946F2D0079F723 /* BasePath.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -261,21 +333,29 @@
 			files = (
 				09BC472A258E02C100A040F1 /* BigMoonKeyframeParameters.swift in Sources */,
 				0952CF64259316D800BAC2B2 /* Example1CapusleWithEmoji.swift in Sources */,
+				092839FC2594729A0079F723 /* CubicCurve.swift in Sources */,
 				0993945F2592369100BE2E5C /* Example1CapsuleBg.swift in Sources */,
 				09BC4714258DFE2D00A040F1 /* BigFaceView.swift in Sources */,
 				09BC4712258DFE2D00A040F1 /* StonePitView.swift in Sources */,
 				0993946425923B1500BE2E5C /* Example1ScrollView.swift in Sources */,
 				09BC46FD258DF9C200A040F1 /* Keyframe.swift in Sources */,
-				09BC4700258DFB2200A040F1 /* CurvePath.swift in Sources */,
+				09BC4700258DFB2200A040F1 /* CurvePathDelegate.swift in Sources */,
+				09283A02259474010079F723 /* InfinityShape.swift in Sources */,
 				09A7F780259208C800D76CF9 /* Example1Parameters.swift in Sources */,
+				092839F325946F2D0079F723 /* BasePath.swift in Sources */,
 				09BC46EE258DECD900A040F1 /* ContentView.swift in Sources */,
 				09BC4711258DFE2D00A040F1 /* Example3.swift in Sources */,
 				0952CF5D259302DA00BAC2B2 /* Example1Emoji.swift in Sources */,
+				092839F625946F530079F723 /* PolylineCurve.swift in Sources */,
 				093C2C6E258F777400202AE9 /* Navigator.swift in Sources */,
 				093C2C6A258F773200202AE9 /* Example1.swift in Sources */,
 				093C2C65258F753700202AE9 /* Example2.swift in Sources */,
+				092839EF2594382B0079F723 /* PathView.swift in Sources */,
+				0952CF6C2593455000BAC2B2 /* ShowThePath.swift in Sources */,
 				09BC46EC258DECD900A040F1 /* GestureKeyframeApp.swift in Sources */,
+				091D0D8A25948463000717A2 /* CubicCurve_Previews.swift in Sources */,
 				09BC4719258DFE6C00A040F1 /* UIColorHelper.swift in Sources */,
+				094838D0259474B2000224DA /* TestNodes.swift in Sources */,
 				09BC4713258DFE2D00A040F1 /* StonePitParameters.swift in Sources */,
 				0952CF6125930E2900BAC2B2 /* theme.swift in Sources */,
 				09A7F77D259205AB00D76CF9 /* ScrollViewOffset.swift in Sources */,
