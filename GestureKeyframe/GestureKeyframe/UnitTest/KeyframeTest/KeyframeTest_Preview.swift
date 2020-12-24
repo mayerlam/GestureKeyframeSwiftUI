@@ -17,9 +17,8 @@ struct KeyframeTestView: View {
         
         Keyframe(bindPect: x / 100, timeLine: Set(testNodes3.map { $0.x }), curveType: .line) { value in
             VStack {
-                Text("\(x), \(value([200, 300, 150, 350, 300, 400]))")
                 ShowThePath(celsius: $x, curve: curve) { _ in
-                    value([200, 300, 150, 350, 300, 400])
+                    value(testNodes3.map { $0.y })
                 }
             }
         }
