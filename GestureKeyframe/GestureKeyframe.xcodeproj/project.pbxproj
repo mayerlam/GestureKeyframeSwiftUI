@@ -15,6 +15,8 @@
 		092839F625946F530079F723 /* PolylineCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092839F525946F530079F723 /* PolylineCurve.swift */; };
 		092839FC2594729A0079F723 /* CubicCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092839FB2594729A0079F723 /* CubicCurve.swift */; };
 		09283A02259474010079F723 /* InfinityShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09283A01259474010079F723 /* InfinityShape.swift */; };
+		092AE52025949493009F12CC /* KeyframeTest_Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092AE51F25949493009F12CC /* KeyframeTest_Preview.swift */; };
+		092AE523259496CD009F12CC /* FollowThePathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092AE522259496CD009F12CC /* FollowThePathView.swift */; };
 		093C2C65258F753700202AE9 /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C64258F753700202AE9 /* Example2.swift */; };
 		093C2C6A258F773200202AE9 /* Example1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C69258F773200202AE9 /* Example1.swift */; };
 		093C2C6E258F777400202AE9 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093C2C6D258F777400202AE9 /* Navigator.swift */; };
@@ -51,6 +53,8 @@
 		092839F525946F530079F723 /* PolylineCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolylineCurve.swift; sourceTree = "<group>"; };
 		092839FB2594729A0079F723 /* CubicCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicCurve.swift; sourceTree = "<group>"; };
 		09283A01259474010079F723 /* InfinityShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityShape.swift; sourceTree = "<group>"; };
+		092AE51F25949493009F12CC /* KeyframeTest_Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyframeTest_Preview.swift; sourceTree = "<group>"; };
+		092AE522259496CD009F12CC /* FollowThePathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowThePathView.swift; sourceTree = "<group>"; };
 		093C2C64258F753700202AE9 /* Example2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2.swift; sourceTree = "<group>"; };
 		093C2C69258F773200202AE9 /* Example1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1.swift; sourceTree = "<group>"; };
 		093C2C6D258F777400202AE9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 		091D0D8D259484AD000717A2 /* KeyframeTest */ = {
 			isa = PBXGroup;
 			children = (
+				092AE51F25949493009F12CC /* KeyframeTest_Preview.swift */,
 			);
 			path = KeyframeTest;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				092839EE2594382B0079F723 /* PathView.swift */,
 				0952CF6B2593455000BAC2B2 /* ShowThePath.swift */,
 				094838CF259474B2000224DA /* TestNodes.swift */,
+				092AE522259496CD009F12CC /* FollowThePathView.swift */,
 			);
 			path = public;
 			sourceTree = "<group>";
@@ -355,6 +361,7 @@
 				0993946425923B1500BE2E5C /* Example1ScrollView.swift in Sources */,
 				09BC46FD258DF9C200A040F1 /* Keyframe.swift in Sources */,
 				09BC4700258DFB2200A040F1 /* CurvePathDelegate.swift in Sources */,
+				092AE52025949493009F12CC /* KeyframeTest_Preview.swift in Sources */,
 				09283A02259474010079F723 /* InfinityShape.swift in Sources */,
 				09A7F780259208C800D76CF9 /* Example1Parameters.swift in Sources */,
 				092839F325946F2D0079F723 /* BasePath.swift in Sources */,
@@ -368,6 +375,7 @@
 				092839EF2594382B0079F723 /* PathView.swift in Sources */,
 				0952CF6C2593455000BAC2B2 /* ShowThePath.swift in Sources */,
 				09BC46EC258DECD900A040F1 /* GestureKeyframeApp.swift in Sources */,
+				092AE523259496CD009F12CC /* FollowThePathView.swift in Sources */,
 				091D0D8A25948463000717A2 /* CubicCurve_Previews.swift in Sources */,
 				09BC4719258DFE6C00A040F1 /* UIColorHelper.swift in Sources */,
 				094838D0259474B2000224DA /* TestNodes.swift in Sources */,

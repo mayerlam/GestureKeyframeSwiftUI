@@ -18,10 +18,7 @@ public enum UseCoordinate {
 /// 变化曲线类型
 public enum CurveType {
     case line
-    case curve
-    case curvedSurface
-    case oneDimensional
-    case twoDimensional
+    case Cubic
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
@@ -34,7 +31,7 @@ public struct Keyframe<Content> : View where Content : View {
         func gen(_ keyFrames: [CGFloat]) -> CGFloat {
             return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept, timeLine: timeLine, curveType: curveType, precision: precision)
         }
-
+        
         self.body = content(gen)
     }
     
@@ -46,7 +43,7 @@ public struct Keyframe<Content> : View where Content : View {
     ///   - precision: 计算精度
     ///   - content: 用以代理渲染视图
     public init (_ bindIntercept: CGPoint, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
-
+        
         func gen(_ keyFrames: [CGFloat], _ use: UseCoordinate) -> CGFloat {
             if use == .x {
                 let tl: FAxis = Set(timeLine.map { $0.x })
@@ -109,7 +106,7 @@ public struct Keyframe<Content> : View where Content : View {
     ///   - curveType: path类型
     ///   - precision: 精度
     /// - Returns: 当前的帧值
-    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], _ bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001) -> CGFloat {
+    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], _ bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType, precision: CGFloat = 0.001) -> CGFloat {
         
         /// 对时间线进行排序
         let timeLineAsc = timeLine.sorted(by: <)
@@ -122,17 +119,18 @@ public struct Keyframe<Content> : View where Content : View {
         for (index, element) in tl.enumerated() {
             nodes.append(CGPoint(x: element, y: kf[index]))
         }
-
+        
         switch curveType {
-            case .line:
-                let timeLineCurv = PolylineCurve(nodes)
-                /**
-                 * We use the `basePath.curValue(x: CGFloat, precision: CGFloat)` method
-                 * Because we think the keyframe-path suppose an single-value function
-                 */
-                return timeLineCurv.curValue(x: bindIntercept, precision: precision)!
-            default:
-                return .zero
+        case .line:
+            let timeLineCurv = PolylineCurve(nodes)
+            /**
+             * We use the `basePath.curValue(x: CGFloat, precision: CGFloat)` method
+             * Because we think the keyframe-path suppose an single-value function
+             */
+            return timeLineCurv.curValue(x: bindIntercept, precision: precision)!
+        case .Cubic:
+            let curve = CubicCurve(nodes)
+            return curve.curValue(x: bindIntercept, precision: precision)!
         }
     }
 }

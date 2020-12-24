@@ -20,18 +20,15 @@ struct PathData {
 
 struct ShowThePath: View {
     
+    @Binding var celsius: CGFloat
+    
     var curve: BasePath
     
-    @State private var celsius: Double = 0
+    let getY: (CGFloat) -> CGFloat
     
     var body: some View {
         GeometryReader { geo in
             let pect = CGFloat(celsius / 100)
-            let boundingRect = curve.path!.boundingRect
-            let width = boundingRect.width / 2
-            let height = boundingRect.height / 2
-            let offsetX = boundingRect.minX
-            let offsetY = boundingRect.minY
             let pathData = PathData(
                 xPect: pect,
                 x: curve.percent2X(pect)!,
@@ -40,20 +37,12 @@ struct ShowThePath: View {
             )
             
             VStack {
-                ZStack(alignment: .center) {
-                    PathView(path: curve.path!)
-                    Circle()
-                        .frame(width: 10, height: 10, alignment: .center)
-                        .foregroundColor(Color.blue)
-                        .offset(x: -width, y: -height)
-                        .offset(x: curve.percent2X(pect)! - offsetX,
-                                y: curve.curValue(pect: pect)! - offsetY)
-                }
-                .frame(width: geo.size.width, height: 300, alignment: .center)
+                FollowThePathView(curve: curve, x: curve.percent2X(pect)!, y: getY(celsius))
+                    .frame(width: geo.size.width, height: 300, alignment: .center)
                 
                 Slider(value: $celsius, in: 0...100, step: 0.01)
                     .frame(width: geo.size.width / 2)
-                
+
                 ForEach(0..<4) { i in
                     HStack {
                         HStack {
@@ -76,9 +65,22 @@ struct ShowThePath: View {
     ]
 }
 
+struct ShowThePathPreview: View {
+    
+    @State var celsius: CGFloat = .zero
+    
+    let curve: BasePath
+    
+    var body: some View {
+        ShowThePath(celsius: $celsius, curve: curve) {
+            curve.curValue(pect: CGFloat($0 / 100))!
+        }
+    }
+}
+
 struct ShowThePath_Previews: PreviewProvider {
     static var previews: some View {
-        ShowThePath(curve:  BasePath(InfinityShape.createInfinityPath(in: CGRect(x: 0, y: 0, width: 200, height: 300))) )
+        ShowThePathPreview(curve: BasePath(InfinityShape.createInfinityPath(in: CGRect(x: 0, y: 0, width: 200, height: 300))))
     }
 }
 
