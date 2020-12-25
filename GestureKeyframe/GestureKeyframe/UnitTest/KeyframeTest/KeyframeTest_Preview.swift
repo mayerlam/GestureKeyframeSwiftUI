@@ -21,6 +21,12 @@ struct KeyframeTestView: View {
                 }
             }
         }
+        
+        Keyframe(bindPect: x / 100, path: curve.path!) { value in
+            VStack {
+                ShowThePath(celsius: $x, curve: curve) { _ in value() }
+            }
+        }
     }
 }
 
