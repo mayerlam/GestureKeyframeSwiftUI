@@ -75,7 +75,7 @@ public struct Keyframe<Content> : View where Content : View {
         }
         /// 对时间线进行排序
         let timeLineAsc = timeLine.sorted(by: <)
-        let pect = bindIntercept / ( timeLineAsc.last! - timeLineAsc.first!)
+        let pect:CGFloat = (bindIntercept - timeLineAsc.first!) / ( timeLineAsc.last! - timeLineAsc.first!)
         return Keyframe.oneDimensionalHandler(keyFrames, bindPect: pect, timeLine: timeLine, curveType: curveType, precision: precision)
     }
     

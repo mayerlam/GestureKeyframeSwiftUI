@@ -73,11 +73,13 @@ class BasePath {
         /// Even you give a bigger number, the program still run ok
         /// But it always return `0`
         guard precision < 1 else {
-            return .zero
+            return  CGPoint.zero
         }
         
-        let from: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1 - precision) : pect
-        let to: CGFloat = pect > CGFloat(1 - precision) ? CGFloat(1) : pect + precision
+        let percent = pect < 0 ? 0 : (pect > 1 ? 1 : pect)
+        
+        let from: CGFloat = percent > CGFloat(1 - precision) ? CGFloat(1 - precision) : percent
+        let to: CGFloat = percent > CGFloat(1 - precision) ? CGFloat(1) : percent + precision
         let tinySegment = pt.trimmedPath(from: from, to: to)
         return CGPoint(x: tinySegment.boundingRect.midX, y: tinySegment.boundingRect.midY)
     }
