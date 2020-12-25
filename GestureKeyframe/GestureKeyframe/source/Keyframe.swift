@@ -35,7 +35,8 @@ public struct Keyframe<Content> : View where Content : View {
     
     public init (bindPect: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
         func gen() -> CGFloat {
-            return 0
+            let curve = BasePath(path)
+            return curve.curValue(pect: bindPect, precision: precision)!
         }
         self.body = content(gen)
     }
@@ -126,7 +127,8 @@ extension Keyframe {
     
     public init (_ bindIntercept: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
         func gen() -> CGFloat {
-            return 0
+            let curve = BasePath(path)
+            return curve.curValue(x: bindIntercept, precision: precision)!
         }
         self.body = content(gen)
     }
@@ -165,9 +167,16 @@ extension Keyframe {
         self.body = content(gen)
     }
     
-    public init (_ bindIntercept: CGPoint, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
-        func gen() -> CGFloat {
-            return 0
+    public init (_ bindIntercept: CGPoint, path: (Path, Path), precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping (UseCoordinate) -> CGFloat) -> Content) {
+        func gen(_ use: UseCoordinate) -> CGFloat {
+            switch use {
+            case .x:
+                let curve = BasePath(path.0)
+                return curve.curValue(x: bindIntercept.x, precision: precision)!
+            default:
+                let curve = BasePath(path.1)
+                return curve.curValue(x: bindIntercept.y, precision: precision)!
+            }
         }
         self.body = content(gen)
     }
@@ -177,13 +186,11 @@ extension Keyframe {
     
     public init (_ bindIntercept: CGSize, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
         let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
-        self.init(point, timeLine: timeLine, content: content)
+        self.init(point, timeLine: timeLine, curveType: curveType, precision: precision, content: content)
     }
     
-    public init (_ bindIntercept: CGSize, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
-        func gen() -> CGFloat {
-            return 0
-        }
-        self.body = content(gen)
+    public init (_ bindIntercept: CGSize, path: (Path, Path), precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping (UseCoordinate) -> CGFloat) -> Content) {
+        let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
+        self.init(point, path: path, precision: precision, content: content)
     }
 }
