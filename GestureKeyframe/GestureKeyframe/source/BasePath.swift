@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+@propertyWrapper
+struct PercentNumber {
+    var value: CGFloat = 0
+    
+    /// Limit the range of value from 0 to 1
+    var wrappedValue: CGFloat {
+        get { value }
+        set { value = newValue < 0 ? 0 : ( newValue > 1 ? 1 : newValue) }
+    }
+}
 
 class BasePath {
     var nodes: [CGPoint]?
@@ -43,6 +53,8 @@ class BasePath {
     
     private var _path: Path?
     
+    @PercentNumber private var percent: CGFloat
+    
     ///
     /// - Parameter nodes: the given nodes
     init(_ nodes: [CGPoint]) {
@@ -60,7 +72,7 @@ class BasePath {
     ///
     /// - Parameter pect: The given pect
     /// - Returns: Calculated x coordinate
-    func percent2X(_ pect: CGFloat) -> CGFloat? {
+    func percent2X(_  pect: CGFloat) -> CGFloat? {
         return curPoint(pect: pect)?.x
     }
     
@@ -76,7 +88,7 @@ class BasePath {
             return  CGPoint.zero
         }
         
-        let percent = pect < 0 ? 0 : (pect > 1 ? 1 : pect)
+        self.percent = pect
         
         let from: CGFloat = percent > CGFloat(1 - precision) ? CGFloat(1 - precision) : percent
         let to: CGFloat = percent > CGFloat(1 - precision) ? CGFloat(1) : percent + precision
@@ -105,15 +117,17 @@ class BasePath {
     func curAngle(pect: CGFloat, precision: CGFloat = 0.001) -> CGFloat? {
         var weight: CGFloat = 1.00
         
-        guard let pt1 = curPoint(pect: pect, precision: precision),
-              var pt2 = curPoint(pect: pect + weight * precision * 10, precision: precision)
+        self.percent = pect
+        
+        guard let pt1 = curPoint(pect: percent, precision: precision),
+              var pt2 = curPoint(pect: percent + weight * precision * 10, precision: precision)
         else {
             return nil
         }
         
         if pt1 == pt2 {
             weight = -1
-            pt2 = curPoint(pect: pect + weight * precision * 10, precision: precision)!
+            pt2 = curPoint(pect: percent + weight * precision * 10, precision: precision)!
         }
         
         if pt1 == pt2 {
@@ -147,9 +161,14 @@ extension BasePath {
         }
         
         let length = endX - beginX
-        let delta = curX - beginX
         
-        return delta < 0 ? 0 : ( delta > (endX - beginX) ? 1 : delta / length)
+        guard length > 0 else {
+            return .nan
+        }
+        
+        let delta = curX - beginX
+        self.percent = delta / length
+        return percent
     }
     
     /// According to the given X coordinate,
