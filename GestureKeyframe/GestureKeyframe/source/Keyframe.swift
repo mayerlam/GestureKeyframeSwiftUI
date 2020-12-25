@@ -33,6 +33,13 @@ public struct Keyframe<Content> : View where Content : View {
         self.body = content(gen)
     }
     
+    public init (_ bindPect: CGPoint, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
+        func gen() -> CGFloat {
+            return 0
+        }
+        self.body = content(gen)
+    }
+    
     /// `oneDimensionalHandler`生成函数
     /// 是一个通过变化曲线`path`，以及给定指针x坐标而映射得到对应的值
     /// 可以应用在只提供若干关键帧，而推算出所有的变化
@@ -117,6 +124,13 @@ extension Keyframe {
         self.body = content(gen)
     }
     
+    public init (_ bindIntercept: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
+        func gen() -> CGFloat {
+            return 0
+        }
+        self.body = content(gen)
+    }
+    
     public static func oneDimensionalHandler(intercept: CGFloat, _ keyFrames: [CGFloat], _ timeLine: FAxis, _ curveType: CurveType, _ precision: CGFloat = 0.001) -> CGFloat {
         guard timeLine.count > 1 else {
             return .nan
@@ -150,18 +164,23 @@ extension Keyframe {
         
         self.body = content(gen)
     }
+    
+    public init (_ bindIntercept: CGPoint, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
+        func gen() -> CGFloat {
+            return 0
+        }
+        self.body = content(gen)
+    }
 }
 
 extension Keyframe {
+    
     public init (_ bindIntercept: CGSize, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
         let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
         self.init(point, timeLine: timeLine, content: content)
     }
-}
-
-
-extension Keyframe {
-    public init (_ bindIntercept: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
+    
+    public init (_ bindIntercept: CGSize, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
         func gen() -> CGFloat {
             return 0
         }
