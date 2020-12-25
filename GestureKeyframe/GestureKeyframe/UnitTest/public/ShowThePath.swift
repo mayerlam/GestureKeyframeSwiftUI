@@ -37,8 +37,13 @@ struct ShowThePath: View {
             )
             
             VStack {
-                FollowThePathView(curve: curve, x: curve.percent2X(pect)!, y: getY(celsius))
-                    .frame(width: geo.size.width, height: 300, alignment: .center)
+                HStack {
+                    Spacer()
+                    FollowThePathView(curve: curve, x: curve.percent2X(pect)!, y: getY(celsius))
+                        .frame(width: geo.size.width - 60, height: (geo.size.width - 60) / 2)
+                    Spacer()
+                }.frame(width: geo.size.width, height: 250, alignment: .center)
+
                 
                 Slider(value: $celsius, in: 0...100, step: 0.01)
                     .frame(width: geo.size.width / 2)
