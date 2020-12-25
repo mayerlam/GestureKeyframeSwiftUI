@@ -26,57 +26,31 @@ public struct Keyframe<Content> : View where Content : View {
     
     public var body: Content
     
-    public init (bindPect: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
-        func gen(_ keyFrames: [CGFloat]) -> CGFloat {
-            return Keyframe.oneDimensionalHandler(keyFrames, bindPect: bindPect, timeLine: timeLine, curveType: curveType, precision: precision)
-        }
-        self.body = content(gen)
-    }
-    
-    public init (_ bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
+    public init (
+        bindPect: CGFloat,
+        timeLine: FAxis,
+        curveType: CurveType = .line,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content
+    ) {
         
         func gen(_ keyFrames: [CGFloat]) -> CGFloat {
-            return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept: bindIntercept, timeLine: timeLine, curveType: curveType, precision: precision)
+            return Keyframe.oneDimensionalHandler(pect: bindPect, keyFrames, timeLine, curveType, precision)
         }
-        
         self.body = content(gen)
     }
     
-    /// 此构造方法可以方便地监控指针在整个平面的移动
-    /// - Parameters:
-    ///   - bindIntercept: 绑定这个参数用来映射值
-    ///   - timeLine: 给定一个时间线
-    ///   - curveType: 构造的曲线类型
-    ///   - precision: 计算精度
-    ///   - content: 用以代理渲染视图
-    public init (_ bindIntercept: CGPoint, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
-        
-        func gen(_ keyFrames: [CGFloat], _ use: UseCoordinate) -> CGFloat {
-            if use == .x {
-                let tl: FAxis = Set(timeLine.map { $0.x })
-                return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept: bindIntercept.x, timeLine: tl, curveType: curveType, precision: precision)
-            } else  {
-                let tl: FAxis = Set(timeLine.map { $0.y })
-                return Keyframe.oneDimensionalHandler(keyFrames, bindIntercept: bindIntercept.y, timeLine: tl, curveType: curveType, precision: precision)
-            }
+    public init (
+        bindPect: CGFloat,
+        path: Path,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping () -> CGFloat) -> Content
+    ) {
+        func gen() -> CGFloat {
+            let curve = BasePath(path)
+            return curve.curValue(pect: bindPect, precision: precision)!
         }
-        
         self.body = content(gen)
-    }
-    
-    public init (_ bindIntercept: CGSize, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
-        let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
-        self.init(point, timeLine: timeLine, content: content)
-    }
-    
-    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType, precision: CGFloat = 0.001) -> CGFloat {
-        guard timeLine.count > 1 else {
-            return .nan
-        }
-        /// 对时间线进行排序
-        let timeLineAsc = timeLine.sorted(by: <)
-        let pect:CGFloat = (bindIntercept - timeLineAsc.first!) / ( timeLineAsc.last! - timeLineAsc.first!)
-        return Keyframe.oneDimensionalHandler(keyFrames, bindPect: pect, timeLine: timeLine, curveType: curveType, precision: precision)
     }
     
     /// `oneDimensionalHandler`生成函数
@@ -123,7 +97,13 @@ public struct Keyframe<Content> : View where Content : View {
     ///   - curveType: path类型
     ///   - precision: 精度
     /// - Returns: 当前的帧值
-    public static func oneDimensionalHandler(_ keyFrames: [CGFloat], bindPect: CGFloat, timeLine: FAxis, curveType: CurveType, precision: CGFloat = 0.001) -> CGFloat {
+    public static func oneDimensionalHandler(
+        pect: CGFloat,
+        _ keyFrames: [CGFloat],
+        _ timeLine: FAxis,
+        _ curveType: CurveType,
+        _ precision: CGFloat = 0.001
+    ) -> CGFloat {
         
         /// 对时间线进行排序
         let timeLineAsc = timeLine.sorted(by: <)
@@ -144,10 +124,130 @@ public struct Keyframe<Content> : View where Content : View {
              * We use the `basePath.curValue(x: CGFloat, precision: CGFloat)` method
              * Because we think the keyframe-path suppose an single-value function
              */
-            return timeLineCurv.curValue(pect: bindPect, precision: precision)!
+            return timeLineCurv.curValue(pect: pect, precision: precision)!
         case .Cubic:
             let curve = CubicCurve(nodes)
-            return curve.curValue(pect: bindPect, precision: precision)!
+            return curve.curValue(pect: pect, precision: precision)!
         }
+    }
+}
+
+extension Keyframe {
+    
+    public init (
+        _ bindIntercept: CGFloat,
+        timeLine: FAxis,
+        curveType: CurveType = .line,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content
+    ) {
+        
+        func gen(_ keyFrames: [CGFloat]) -> CGFloat {
+            return Keyframe.oneDimensionalHandler(intercept: bindIntercept, keyFrames, timeLine, curveType, precision)
+        }
+        
+        self.body = content(gen)
+    }
+    
+    public init (
+        _ bindIntercept: CGFloat,
+        path: Path,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping () -> CGFloat) -> Content
+    ) {
+        func gen() -> CGFloat {
+            let curve = BasePath(path)
+            return curve.curValue(x: bindIntercept, precision: precision)!
+        }
+        self.body = content(gen)
+    }
+    
+    public static func oneDimensionalHandler(
+        intercept: CGFloat,
+        _ keyFrames: [CGFloat],
+        _ timeLine: FAxis,
+        _ curveType: CurveType,
+        _ precision: CGFloat = 0.001
+    ) -> CGFloat {
+        guard timeLine.count > 1 else {
+            return .nan
+        }
+        /// 对时间线进行排序
+        let timeLineAsc = timeLine.sorted(by: <)
+        let pect:CGFloat = (intercept - timeLineAsc.first!) / ( timeLineAsc.last! - timeLineAsc.first!)
+        return Keyframe.oneDimensionalHandler(pect: pect, keyFrames, timeLine, curveType, precision)
+    }
+}
+
+extension Keyframe {
+    /// 此构造方法可以方便地监控指针在整个平面的移动
+    /// - Parameters:
+    ///   - bindIntercept: 绑定这个参数用来映射值
+    ///   - timeLine: 给定一个时间线
+    ///   - curveType: 构造的曲线类型
+    ///   - precision: 计算精度
+    ///   - content: 用以代理渲染视图
+    public init (
+        _ bindIntercept: CGPoint,
+        timeLine: PTAxis,
+        curveType: CurveType = .line,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content
+    ) {
+        
+        func gen(_ keyFrames: [CGFloat], _ use: UseCoordinate) -> CGFloat {
+            if use == .x {
+                let tl: FAxis = Set(timeLine.map { $0.x })
+                return Keyframe.oneDimensionalHandler(intercept: bindIntercept.x, keyFrames, tl, curveType, precision)
+            } else  {
+                let tl: FAxis = Set(timeLine.map { $0.y })
+                return Keyframe.oneDimensionalHandler(intercept: bindIntercept.y, keyFrames, tl, curveType, precision)
+            }
+        }
+        
+        self.body = content(gen)
+    }
+    
+    public init (
+        _ bindIntercept: CGPoint,
+        path: (Path, Path),
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping (UseCoordinate) -> CGFloat) -> Content
+    ) {
+        func gen(_ use: UseCoordinate) -> CGFloat {
+            switch use {
+            case .x:
+                let curve = BasePath(path.0)
+                return curve.curValue(x: bindIntercept.x, precision: precision)!
+            case .y:
+                let curve = BasePath(path.1)
+                return curve.curValue(x: bindIntercept.y, precision: precision)!
+            }
+        }
+        self.body = content(gen)
+    }
+}
+
+extension Keyframe {
+    
+    public init (
+        _ bindIntercept: CGSize,
+        timeLine: PTAxis,
+        curveType: CurveType = .line,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content
+    ) {
+        let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
+        self.init(point, timeLine: timeLine, curveType: curveType, precision: precision, content: content)
+    }
+    
+    public init (
+        _ bindIntercept: CGSize,
+        path: (Path, Path),
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping (UseCoordinate) -> CGFloat) -> Content
+    ) {
+        let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
+        self.init(point, path: path, precision: precision, content: content)
     }
 }
