@@ -40,7 +40,7 @@ struct ShowThePath: View {
                 HStack {
                     Spacer()
                     FollowThePathView(curve: curve, x: curve.percent2X(pect)!, y: getY(celsius))
-                        .frame(width: geo.size.width - 60, height: (geo.size.width - 60) / 2)
+                        .frame(width: geo.size.width - 60, height: (geo.size.width) / 2)
                     Spacer()
                 }.frame(width: geo.size.width, height: 250, alignment: .center)
 

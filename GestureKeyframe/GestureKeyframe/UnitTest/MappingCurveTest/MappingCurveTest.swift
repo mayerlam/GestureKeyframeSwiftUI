@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MappingCurveTest: View {
     func map(_ x: CGFloat) -> CGFloat {
-        return sin(x / 10) * 50
+        return sin(x)
     }
     
     var body: some View {

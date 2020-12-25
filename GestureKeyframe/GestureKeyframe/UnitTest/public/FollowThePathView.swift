@@ -24,8 +24,7 @@ struct FollowThePathView: View {
             let scaleY = geo.size.height / height
             
             ZStack(alignment: .center) {
-                PathView(path: curve.path!)
-                    .scaleEffect(x: scaleX, y: scaleY)
+                PathView(path: curve.path!, scaleX: scaleX, scaleY: scaleY)
                 Circle()
                     .frame(width: 10, height: 10, alignment: .center)
                     .foregroundColor(Color.blue)
