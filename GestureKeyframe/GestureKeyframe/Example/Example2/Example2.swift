@@ -12,7 +12,7 @@ struct Example2: View {
     
     let keyFrames: [CGPoint] = []
     var body: some View {
-        Text("Example2")
+        KeyframeTestView()
     }
 }
 
