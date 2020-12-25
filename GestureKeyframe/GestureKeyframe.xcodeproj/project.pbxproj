@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0901DB112595EBA00055A8F6 /* MappingCurveTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901DB102595EBA00055A8F6 /* MappingCurveTest.swift */; };
 		091D0D8A25948463000717A2 /* CubicCurve_Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091D0D8925948463000717A2 /* CubicCurve_Previews.swift */; };
 		091D0D9125948ED4000717A2 /* alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091D0D9025948ED4000717A2 /* alias.swift */; };
 		091D0D9425948EE4000717A2 /* KFPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091D0D9325948EE4000717A2 /* KFPoint.swift */; };
@@ -27,6 +28,7 @@
 		0952CF6C2593455000BAC2B2 /* ShowThePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952CF6B2593455000BAC2B2 /* ShowThePath.swift */; };
 		0993945F2592369100BE2E5C /* Example1CapsuleBg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */; };
 		0993946425923B1500BE2E5C /* Example1ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993946325923B1500BE2E5C /* Example1ScrollView.swift */; };
+		09A433952595B7A6007B184E /* MappingCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A433942595B7A6007B184E /* MappingCurve.swift */; };
 		09A7F77D259205AB00D76CF9 /* ScrollViewOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7F77C259205AB00D76CF9 /* ScrollViewOffset.swift */; };
 		09A7F780259208C800D76CF9 /* Example1Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7F77F259208C800D76CF9 /* Example1Parameters.swift */; };
 		09BC46EC258DECD900A040F1 /* GestureKeyframeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC46EB258DECD900A040F1 /* GestureKeyframeApp.swift */; };
@@ -45,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0901DB102595EBA00055A8F6 /* MappingCurveTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingCurveTest.swift; sourceTree = "<group>"; };
 		091D0D8925948463000717A2 /* CubicCurve_Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicCurve_Previews.swift; sourceTree = "<group>"; };
 		091D0D9025948ED4000717A2 /* alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alias.swift; sourceTree = "<group>"; };
 		091D0D9325948EE4000717A2 /* KFPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFPoint.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		0952CF6B2593455000BAC2B2 /* ShowThePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowThePath.swift; sourceTree = "<group>"; };
 		0993945E2592369100BE2E5C /* Example1CapsuleBg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1CapsuleBg.swift; sourceTree = "<group>"; };
 		0993946325923B1500BE2E5C /* Example1ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1ScrollView.swift; sourceTree = "<group>"; };
+		09A433942595B7A6007B184E /* MappingCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingCurve.swift; sourceTree = "<group>"; };
 		09A7F77C259205AB00D76CF9 /* ScrollViewOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffset.swift; sourceTree = "<group>"; };
 		09A7F77F259208C800D76CF9 /* Example1Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example1Parameters.swift; sourceTree = "<group>"; };
 		09BC46E8258DECD900A040F1 /* GestureKeyframe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestureKeyframe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0901DB0F2595EB720055A8F6 /* MappingCurveTest */ = {
+			isa = PBXGroup;
+			children = (
+				0901DB102595EBA00055A8F6 /* MappingCurveTest.swift */,
+			);
+			path = MappingCurveTest;
+			sourceTree = "<group>";
+		};
 		091D0D8D259484AD000717A2 /* KeyframeTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +120,7 @@
 			children = (
 				092839F525946F530079F723 /* PolylineCurve.swift */,
 				092839FB2594729A0079F723 /* CubicCurve.swift */,
+				09A433942595B7A6007B184E /* MappingCurve.swift */,
 			);
 			path = Curves;
 			sourceTree = "<group>";
@@ -176,6 +189,7 @@
 				092839FF259473870079F723 /* public */,
 				092839FE2594736D0079F723 /* CubicCurveTest */,
 				092839F8259471810079F723 /* BasePathTest */,
+				0901DB0F2595EB720055A8F6 /* MappingCurveTest */,
 				091D0D8D259484AD000717A2 /* KeyframeTest */,
 			);
 			path = UnitTest;
@@ -273,11 +287,11 @@
 		09BC4727258E026700A040F1 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				092839F225946F2D0079F723 /* BasePath.swift */,
+				09BC46FF258DFB2200A040F1 /* CurvePathDelegate.swift */,
+				09BC46FC258DF9C100A040F1 /* Keyframe.swift */,
 				092AE51A2594922C009F12CC /* Helpers */,
 				091D0D8E259484CC000717A2 /* Curves */,
-				09BC46FC258DF9C100A040F1 /* Keyframe.swift */,
-				09BC46FF258DFB2200A040F1 /* CurvePathDelegate.swift */,
-				092839F225946F2D0079F723 /* BasePath.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -365,7 +379,9 @@
 				09283A02259474010079F723 /* InfinityShape.swift in Sources */,
 				09A7F780259208C800D76CF9 /* Example1Parameters.swift in Sources */,
 				092839F325946F2D0079F723 /* BasePath.swift in Sources */,
+				0901DB112595EBA00055A8F6 /* MappingCurveTest.swift in Sources */,
 				09BC46EE258DECD900A040F1 /* ContentView.swift in Sources */,
+				09A433952595B7A6007B184E /* MappingCurve.swift in Sources */,
 				09BC4711258DFE2D00A040F1 /* Example3.swift in Sources */,
 				0952CF5D259302DA00BAC2B2 /* Example1Emoji.swift in Sources */,
 				092839F625946F530079F723 /* PolylineCurve.swift in Sources */,
