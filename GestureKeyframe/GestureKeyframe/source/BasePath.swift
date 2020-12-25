@@ -142,8 +142,8 @@ class BasePath {
 extension BasePath {
     /**
      *  /*----------------------Warning!------------------------ */
-     *  The following methods are available
-     *  if and only if the given path is a single-valued function.
+     *  The following methods are available if and
+     *  only if the given path is a single-valued function.
      *
      *  Even if not, these function still runable,
      *  But it won't be the result you expect.

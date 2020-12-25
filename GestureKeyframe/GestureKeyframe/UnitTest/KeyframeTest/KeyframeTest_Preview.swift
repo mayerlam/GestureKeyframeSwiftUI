@@ -13,14 +13,14 @@ struct KeyframeTestView: View {
     let curve = CubicCurve(testNodes)
     
     var body: some View {
-        
-        Keyframe(bindPect: x / 100, timeLine: Set(testNodes.map { $0.x }), curveType: .Cubic) { value in
-            VStack {
-                ShowThePath(celsius: $x, curve: curve) { _ in
-                    value(testNodes.map { $0.y })
-                }
-            }
-        }
+//
+//        Keyframe(bindPect: x / 100, timeLine: Set(testNodes.map { $0.x }), curveType: .Cubic) { value in
+//            VStack {
+//                ShowThePath(celsius: $x, curve: curve) { _ in
+//                    value(testNodes.map { $0.y })
+//                }
+//            }
+//        }
         
         Keyframe(bindPect: x / 100, path: curve.path!) { value in
             VStack {

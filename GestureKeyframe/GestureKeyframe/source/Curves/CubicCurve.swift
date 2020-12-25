@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-/// Build
+//TODO: 写注释
 class CubicCurve: BasePath, CurvePathDelegate {
     
     override init(_ nodes: [CGPoint]) {
