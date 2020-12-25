@@ -160,10 +160,11 @@ extension Keyframe {
 }
 
 
-//extension Keyframe {
-//    public init (_ bindIntercept: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
-//        func gen() -> CGFloat {
-//
-//        }
-//    }
-//}
+extension Keyframe {
+    public init (_ bindIntercept: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
+        func gen() -> CGFloat {
+            return 0
+        }
+        self.body = content(gen)
+    }
+}
