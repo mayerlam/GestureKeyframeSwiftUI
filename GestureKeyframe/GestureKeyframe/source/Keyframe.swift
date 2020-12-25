@@ -33,7 +33,7 @@ public struct Keyframe<Content> : View where Content : View {
         self.body = content(gen)
     }
     
-    public init (_ bindPect: CGPoint, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
+    public init (bindPect: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
         func gen() -> CGFloat {
             return 0
         }
