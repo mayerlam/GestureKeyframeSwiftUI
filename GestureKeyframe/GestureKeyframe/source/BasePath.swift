@@ -141,7 +141,7 @@ class BasePath {
 
 extension BasePath {
     /**
-     *  Warning:
+     *  /*----------------------Warning!------------------------ */
      *  The following methods are available
      *  if and only if the given path is a single-valued function.
      *
