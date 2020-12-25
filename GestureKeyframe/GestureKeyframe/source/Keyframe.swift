@@ -26,14 +26,26 @@ public struct Keyframe<Content> : View where Content : View {
     
     public var body: Content
     
-    public init (bindPect: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
+    public init (
+        bindPect: CGFloat,
+        timeLine: FAxis,
+        curveType: CurveType = .line,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content
+    ) {
+        
         func gen(_ keyFrames: [CGFloat]) -> CGFloat {
             return Keyframe.oneDimensionalHandler(pect: bindPect, keyFrames, timeLine, curveType, precision)
         }
         self.body = content(gen)
     }
     
-    public init (bindPect: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
+    public init (
+        bindPect: CGFloat,
+        path: Path,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping () -> CGFloat) -> Content
+    ) {
         func gen() -> CGFloat {
             let curve = BasePath(path)
             return curve.curValue(pect: bindPect, precision: precision)!
@@ -85,7 +97,13 @@ public struct Keyframe<Content> : View where Content : View {
     ///   - curveType: path类型
     ///   - precision: 精度
     /// - Returns: 当前的帧值
-    public static func oneDimensionalHandler(pect: CGFloat, _ keyFrames: [CGFloat], _ timeLine: FAxis, _ curveType: CurveType, _ precision: CGFloat = 0.001) -> CGFloat {
+    public static func oneDimensionalHandler(
+        pect: CGFloat,
+        _ keyFrames: [CGFloat],
+        _ timeLine: FAxis,
+        _ curveType: CurveType,
+        _ precision: CGFloat = 0.001
+    ) -> CGFloat {
         
         /// 对时间线进行排序
         let timeLineAsc = timeLine.sorted(by: <)
@@ -116,7 +134,13 @@ public struct Keyframe<Content> : View where Content : View {
 
 extension Keyframe {
     
-    public init (_ bindIntercept: CGFloat, timeLine: FAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content) {
+    public init (
+        _ bindIntercept: CGFloat,
+        timeLine: FAxis,
+        curveType: CurveType = .line,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping ([CGFloat]) -> CGFloat) -> Content
+    ) {
         
         func gen(_ keyFrames: [CGFloat]) -> CGFloat {
             return Keyframe.oneDimensionalHandler(intercept: bindIntercept, keyFrames, timeLine, curveType, precision)
@@ -125,7 +149,12 @@ extension Keyframe {
         self.body = content(gen)
     }
     
-    public init (_ bindIntercept: CGFloat, path: Path, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping () -> CGFloat) -> Content) {
+    public init (
+        _ bindIntercept: CGFloat,
+        path: Path,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping () -> CGFloat) -> Content
+    ) {
         func gen() -> CGFloat {
             let curve = BasePath(path)
             return curve.curValue(x: bindIntercept, precision: precision)!
@@ -133,7 +162,13 @@ extension Keyframe {
         self.body = content(gen)
     }
     
-    public static func oneDimensionalHandler(intercept: CGFloat, _ keyFrames: [CGFloat], _ timeLine: FAxis, _ curveType: CurveType, _ precision: CGFloat = 0.001) -> CGFloat {
+    public static func oneDimensionalHandler(
+        intercept: CGFloat,
+        _ keyFrames: [CGFloat],
+        _ timeLine: FAxis,
+        _ curveType: CurveType,
+        _ precision: CGFloat = 0.001
+    ) -> CGFloat {
         guard timeLine.count > 1 else {
             return .nan
         }
@@ -152,7 +187,13 @@ extension Keyframe {
     ///   - curveType: 构造的曲线类型
     ///   - precision: 计算精度
     ///   - content: 用以代理渲染视图
-    public init (_ bindIntercept: CGPoint, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
+    public init (
+        _ bindIntercept: CGPoint,
+        timeLine: PTAxis,
+        curveType: CurveType = .line,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content
+    ) {
         
         func gen(_ keyFrames: [CGFloat], _ use: UseCoordinate) -> CGFloat {
             if use == .x {
@@ -167,13 +208,18 @@ extension Keyframe {
         self.body = content(gen)
     }
     
-    public init (_ bindIntercept: CGPoint, path: (Path, Path), precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping (UseCoordinate) -> CGFloat) -> Content) {
+    public init (
+        _ bindIntercept: CGPoint,
+        path: (Path, Path),
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping (UseCoordinate) -> CGFloat) -> Content
+    ) {
         func gen(_ use: UseCoordinate) -> CGFloat {
             switch use {
             case .x:
                 let curve = BasePath(path.0)
                 return curve.curValue(x: bindIntercept.x, precision: precision)!
-            default:
+            case .y:
                 let curve = BasePath(path.1)
                 return curve.curValue(x: bindIntercept.y, precision: precision)!
             }
@@ -184,12 +230,23 @@ extension Keyframe {
 
 extension Keyframe {
     
-    public init (_ bindIntercept: CGSize, timeLine: PTAxis, curveType: CurveType = .line, precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content) {
+    public init (
+        _ bindIntercept: CGSize,
+        timeLine: PTAxis,
+        curveType: CurveType = .line,
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping ([CGFloat], UseCoordinate) -> CGFloat) -> Content
+    ) {
         let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
         self.init(point, timeLine: timeLine, curveType: curveType, precision: precision, content: content)
     }
     
-    public init (_ bindIntercept: CGSize, path: (Path, Path), precision: CGFloat = 0.001, @ViewBuilder content: ( @escaping (UseCoordinate) -> CGFloat) -> Content) {
+    public init (
+        _ bindIntercept: CGSize,
+        path: (Path, Path),
+        precision: CGFloat = 0.001,
+        @ViewBuilder content: ( @escaping (UseCoordinate) -> CGFloat) -> Content
+    ) {
         let point = CGPoint(x: bindIntercept.width, y: bindIntercept.height)
         self.init(point, path: path, precision: precision, content: content)
     }
