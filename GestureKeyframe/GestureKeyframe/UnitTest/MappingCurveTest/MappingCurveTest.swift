@@ -14,7 +14,6 @@ struct MappingCurveTest: View {
     
     var body: some View {
         ShowThePathPreview(curve: MappingCurve(map, 0...100))
-            .scaleEffect()
     }
 }
 
