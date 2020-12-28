@@ -29,9 +29,9 @@ class MappingCurve: PolylineCurve {
     //TODO: 注释
     /// 更新路径
     /// - Parameters:
-    ///   - viewRange: <#viewRange description#>
-    ///   - delta: <#delta description#>
-    /// - Returns: <#description#>
+    ///   - viewRange:
+    ///   - delta:
+    /// - Returns:
     func updatePath(_ viewRange: ClosedRange<CGFloat>, _ delta: CGFloat = 0.1) -> Path? {
         self.nodes = MappingCurve.takeSample(self.map, viewRange, delta)
         return self.path
@@ -40,9 +40,9 @@ class MappingCurve: PolylineCurve {
     //TODO: 注释
     /// 取样
     /// - Parameters:
-    ///   - viewRange: <#viewRange description#>
-    ///   - delta: <#delta description#>
-    /// - Returns: <#description#>
+    ///   - viewRange:
+    ///   - delta:
+    /// - Returns:
     static func takeSample(_ map: @escaping (CGFloat) -> CGFloat, _ viewRange: ClosedRange<CGFloat>, _ delta: CGFloat = 0.1) -> [CGPoint] {
         var pts: [CGPoint] = []
         
