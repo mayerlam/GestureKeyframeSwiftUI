@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "GestureKeyframeSwiftUI"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.3"
   spec.summary      = "Make the gesture interaction by given keyframe setting"
 
   # This description is used to generate tags and improve search results.

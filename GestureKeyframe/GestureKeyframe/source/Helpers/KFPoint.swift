@@ -5,7 +5,7 @@
 //  Created by Mayer Lam on 2020/12/24.
 //
 
-import UIKit
+import SwiftUI
 
 public struct KFPoint: Hashable {
     private var point: CGPoint
