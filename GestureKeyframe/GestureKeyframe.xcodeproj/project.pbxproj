@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0901DB112595EBA00055A8F6 /* MappingCurveTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0901DB102595EBA00055A8F6 /* MappingCurveTest.swift */; };
 		091D0D8A25948463000717A2 /* CubicCurve_Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091D0D8925948463000717A2 /* CubicCurve_Previews.swift */; };
-		091D0D9125948ED4000717A2 /* alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091D0D9025948ED4000717A2 /* alias.swift */; };
 		091D0D9425948EE4000717A2 /* KFPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091D0D9325948EE4000717A2 /* KFPoint.swift */; };
 		092839EF2594382B0079F723 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092839EE2594382B0079F723 /* PathView.swift */; };
 		092839F325946F2D0079F723 /* BasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092839F225946F2D0079F723 /* BasePath.swift */; };
@@ -49,7 +48,6 @@
 /* Begin PBXFileReference section */
 		0901DB102595EBA00055A8F6 /* MappingCurveTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingCurveTest.swift; sourceTree = "<group>"; };
 		091D0D8925948463000717A2 /* CubicCurve_Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicCurve_Previews.swift; sourceTree = "<group>"; };
-		091D0D9025948ED4000717A2 /* alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alias.swift; sourceTree = "<group>"; };
 		091D0D9325948EE4000717A2 /* KFPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFPoint.swift; sourceTree = "<group>"; };
 		092839EE2594382B0079F723 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
 		092839F225946F2D0079F723 /* BasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePath.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				091D0D9325948EE4000717A2 /* KFPoint.swift */,
-				091D0D9025948ED4000717A2 /* alias.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -398,7 +395,6 @@
 				09BC4713258DFE2D00A040F1 /* StonePitParameters.swift in Sources */,
 				0952CF6125930E2900BAC2B2 /* theme.swift in Sources */,
 				09A7F77D259205AB00D76CF9 /* ScrollViewOffset.swift in Sources */,
-				091D0D9125948ED4000717A2 /* alias.swift in Sources */,
 				09BC4715258DFE2D00A040F1 /* BigBgImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
