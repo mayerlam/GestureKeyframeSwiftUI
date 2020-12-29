@@ -65,7 +65,7 @@ source 'https://cdn.cocoapods.org/'
 
 我们可以非常快速地通过下面的代码，来使用这个工具：
 
-```
+```swift
 struct Example: View {
 
   /** 
@@ -134,7 +134,7 @@ struct Example: View {
 我们没有设定曲线的类型，所以`Path`的构造方法是默认的线性的，或者说是折线的。目前这个工具只提供供折线（一阶）和三阶贝塞尔曲线的构造。
 当然，这个工具直接暴露了一个使用`Path`的构造接口给开发者：
 
-```
+```swift
   Keyframe (
     _ bindIntercept     : CGFloat,  // 绑定的变量
     path                : Path,  // 给定一个Path曲线
